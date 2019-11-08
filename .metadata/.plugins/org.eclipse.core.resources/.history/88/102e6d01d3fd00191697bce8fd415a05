@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>form page</title>
+
+<style>
+.main {
+	text-align: center;
+}
+
+table {
+	margin: auto;
+}
+
+tr {
+	margin: 5px;
+}
+
+th {
+	padding: 5px;
+	color: white;
+	background: darkgray;
+}
+
+td {
+	padding: 5px;
+	color: black;
+	background: #f0f0f0;
+}
+
+li {
+	list-style: none;
+	padding: 10px;
+}
+
+span {
+	display: inline-block;
+	margin-left: 35px;
+}
+
+textarea {
+	height: 50px;
+	width: 200px;
+	position: relative;
+	top: 20px;
+}
+</style>
+</head>
+<body>
+	<div class="main">
+		<h1>つぶやき画面</h1>
+
+		<form method="post" action="/form" th:object="${formModel}">
+			<ul>
+				<li th:each="error : ${#fields.detailedErrors()}"
+					th:text="${error.message}" />
+			</ul>
+			<ul>
+				<li>名前:<input type="text" name="name" th:field="*{name}" /></li>
+				<li><span>メモ:</span>
+				<textarea name="menu" th:field="*{menu}"></textarea></li>
+				<li><input type="submit" value="登録" /></li>
+			</ul>
+		</form>
+		<h1>登録結果表示</h1>
+		<table>
+			<tr>
+				<th>ID</th>
+				<th>name</th>
+				<th>memu</th>
+			</tr>
+			<tr th:each="obj:${menus}">
+				<td th:text="${obj.id}"></td>
+				<td th:text="${obj.name}"></td>
+				<td th:text="${obj.menu}"></td>
+				<td><a th:href="@{'/edit/' + ${obj.id}}">編集</a></td>
+				<td><a th:href="@{'/delete/' + ${obj.id}}">削除</a></td>
+			</tr>
+		</table>
+		<a href="/">index</a>
+	</div>
+</body>
+</html>

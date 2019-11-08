@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8" />
+<style>
+body { color: #62a600;
+background-color: #588098;
+}
+
+.menu li{
+	width:100%;
+	padding:20px;
+	font-size:20px;
+	font-family: 'Ubuntu', sans-serif;
+
+	border-left: 8px solid #474655;
+	border-top: 1px solid #474655;
+	border-right: 1px solid #474655;
+	border-bottom: 1px solid #474655;
+	background-color: #fff;
+}
+
+.menu{
+    width:150px;
+	height:100px;
+	float:right;
+
+}
+
+.menu{
+
+margin-right:50px;
+}
+
+li{
+
+list-style: none;
+
+}
+</style>
+<title>index</title>
+</head>
+<body>
+	<div class="menu">
+		<ul>
+			<li><a href="/calender/event_form">EventForm</a></li>
+			<li><a href="/calender/event">Calender</a></li>
+			<li><a href="/login">Login</a></li>
+			<li><form action="/logout" method="post">
+			<input type="hidden" th:name="${_csrf.parameterName}"
+				th:value="${_csrf.token}" /> <input type="submit" value="Logout" />
+		</form></li>
+		</ul>
+	</div>
+
+	<div th:if="${user}">
+		<h1 th:text="|こんにちは！Login User:${user}さん|">ログイン</h1>
+	</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+package com.example.controller;
+
+import java.security.Principal;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.example.domain.CalenderEvent;
+import com.example.mapper.CalenderEventMapper;
+import com.example.mapper.ParticipateEventMapper;
+
+@Controller
+public class ParticipateController {
+
+	@Autowired
+	CalenderEventMapper calenderEventMapper;
+
+	@Autowired
+	ParticipateEventMapper perticipateEventMapper;
+
+	@PostMapping("/calender/event_details_join")
+	public ModelAndView join(@ModelAttribute("username")String username,
+			@ModelAttribute("id")int id, Principal principal,ModelAndView mav) {
+		mav.setViewName("/calender/event_details");
+
+		String join = "参加";
+
+	    perticipateEventMapper.joinSave(id,username,join);
+
+	    String findResult = perticipateEventMapper.findJoin(id,username,join);
+
+	    mav.addObject("join",findResult);
+
+		Optional<CalenderEvent> eventDetails = calenderEventMapper.findId(id);
+
+		if (principal != null) {
+
+			final String loginUser = principal.getName();
+			final String user = eventDetails.get().getName();
+
+			if (loginUser.equals(user) == true) {
+				mav.addObject("same", "same");
+			}
+		}
+
+		mav.addObject("eventDetails", eventDetails.get());
+
+		return mav;
+	}
+
+}

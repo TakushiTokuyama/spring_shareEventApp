@@ -1,0 +1,14 @@
+package com.example.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+
+@Controller
+public class PerticipateController {
+
+	@PostMapping("/calender/event_details_join")
+	public String join() {
+		return "event_details";
+	}
+
+}

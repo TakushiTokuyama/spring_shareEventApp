@@ -1,0 +1,17 @@
+package com.example.mapper;
+
+import java.util.Optional;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import com.example.domain.CalenderEvent;
+
+@Mapper
+public interface PerticipateEventMapper {
+
+	void joinSave(@Param("id")int id,@Param("username")String username,@Param("join")String join);
+
+	String findJoin(@Param("id")int id,@Param("username")String username,@Param("join")String join);
+
+}

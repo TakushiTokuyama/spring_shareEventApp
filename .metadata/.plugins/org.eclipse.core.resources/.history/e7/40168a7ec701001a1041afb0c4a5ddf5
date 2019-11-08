@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<link href='https://fonts.googleapis.com/css?family= Ubuntu' rel='stylesheet'>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="/js/script.js"></script>
+
+<title>イベントカレンダー</title>
+
+<style>
+
+
+
+table {
+	position: relative;
+	margin:auto;
+}
+
+.sun {
+	color: red;
+	background-color: #f2dede
+}
+
+.calenderTable th {
+	background-color: #EBE9E3;
+	border: 1px solid #CCC;
+}
+
+.calenderTable td {
+	height: 120px;
+	width: 130px;
+	border: 1px solid #CCC;
+	overflow: auto;
+	vertical-align: text-top;
+}
+
+td ul{
+
+	margin:1px 0px;
+
+}
+
+span{
+	text-align:start;
+}
+
+.date {
+	display: inline;
+}
+
+.menu{
+    width:150px;
+	height:100px;
+	float:right;
+
+}
+
+.menu{
+
+margin-right:50px;
+}
+
+li{
+
+list-style: none;
+
+}
+
+.menu li{
+	width:100%;
+	padding:20px;
+	font-size:20px;
+	font-family: 'Ubuntu', sans-serif;
+
+	border-left: 8px solid #474655;
+	border-top: 1px solid #474655;
+	border-right: 1px solid #474655;
+	border-bottom: 1px solid #474655;
+	background-color: #fff;
+
+
+}
+
+.calenderTitle {
+	width:300px;;
+	height:150px;
+	display:inline-block;
+	margin-left:200px;
+}
+
+.top {
+text-align: center;
+}
+
+
+
+</style>
+</head>
+<body>
+
+	<div class="top">
+
+	<div class="menu">
+		<ul>
+			<li><a href="/">Index</a></li>
+			<li><a href="/calender/event_form">EventForm</a></li>
+		</ul>
+	</div>
+
+<div class = "calenderTitle">
+		<p th:text="${yearNow}"></p>
+
+		<h1 th:text="${selectedCalender}"></h1>
+
+<div class="search">
+		<form action="/calender/event" method="post">
+			<ul>
+				<li><select name="selectedYear"><option
+							th:each="year:${year}" th:value="${year}"><span
+								th:text="${year}"></span></option></select> <select id="today"
+					name="selectedMonth"><option th:each="month:${month}"
+							th:value="${month}"><span th:text="${month}"></span></option></select>
+							<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+							<input type="submit" value="表示"></li>
+			</ul>
+		</form>
+	</div>
+</div>
+
+	</div>
+
+	<table class="calenderTable" th:each="obj:${calenderDays}">
+		<tr>
+			<th class="sun">日</th>
+			<th>月</th>
+			<th>火</th>
+			<th>水</th>
+			<th>木</th>
+			<th>金</th>
+			<th class="sun">土</th>
+		<tbody>
+			<tr>
+				<td class="sun"><div class="date"
+						th:text="${obj.getMonthDay(0)}">1</div>
+					<ul th:each="titleListOne:${titleLists.get(0)}">
+						<li th:each="listOne:${titleListOne}"><a
+							th:href="@{'/calender/event_details/' + ${listOne.id}}"><span
+								th:text="|${listOne.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(1)}">2</div>
+					<ul th:each="titleListTwo:${titleLists.get(1)}">
+						<li th:each="listTwo:${titleListTwo}"><a
+							th:href="@{'/calender/event_details/' + ${listTwo.id}}"><span
+								th:text="|${listTwo.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(2)}">3</div>
+					<ul th:each="titleListThree:${titleLists.get(2)}">
+						<li th:each="listThree:${titleListThree}"><a
+							th:href="@{'/calender/event_details/' + ${listThree.id}}"><span
+								th:text="|${listThree.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(3)}">4</div>
+
+					<ul th:each="titleListFour:${titleLists.get(3)}">
+						<li th:each="listFour:${titleListFour}"><a
+							th:href="@{'/calender/event_details/' + ${listFour.id}}"><span
+								th:text="|${listFour.title}|"></span></a></li>
+					</ul></td>
+
+				<td><div class="date" th:text="${obj.getMonthDay(4)}">5</div>
+					<ul th:each="titleListFive:${titleLists.get(4)}">
+						<li th:each="listFive:${titleListFive}"><a
+							th:href="@{'/calender/event_details/' + ${listFive.id}}"><span
+								th:text="|${listFive.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(5)}">6</div>
+					<ul th:each="titleListSix:${titleLists.get(5)}">
+						<li th:each="listSix:${titleListSix}"><a
+							th:href="@{'/calender/event_details/' + ${listSix.id}}"><span
+								th:text="|${listSix.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(6)}">7</div>
+					<ul th:each="titleListSeven:${titleLists.get(6)}">
+						<li th:each="listSeven:${titleListSeven}"><a
+							th:href="@{'/calender/event_details/' + ${listSeven.id}}"><span
+								th:text="|${listSeven.title}|"></span></a></li>
+					</ul></td>
+			</tr>
+		</tbody>
+		<tbody>
+			<tr>
+				<td class="sun"><div class="date"
+						th:text="${obj.getMonthDay(7)}">8</div>
+					<ul th:each="titleListEight:${titleLists.get(7)}">
+						<li th:each="listEight:${titleListEight}"><a
+							th:href="@{'/calender/event_details/' + ${listEight.id}}"><span
+								th:text="|${listEight.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(8)}">9</div>
+					<ul th:each="titleListNine:${titleLists.get(8)}">
+						<li th:each="listNine:${titleListNine}"><a
+							th:href="@{'/calender/event_details/' + ${listNine.id}}"><span
+								th:text="|${listNine.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(9)}">10</div>
+					<ul th:each="titleListTen:${titleLists.get(9)}">
+						<li th:each="listTen:${titleListTen}"><a
+							th:href="@{'/calender/event_details/' + ${listTen.id}}"><span
+								th:text="|${listTen.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(10)}">11</div>
+					<ul th:each="titleListEleven:${titleLists.get(10)}">
+						<li th:each="listEleven:${titleListEleven}"><a
+							th:href="@{'/calender/event_details/' + ${listEleven.id}}"><span
+								th:text="|${listEleven.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(11)}">12</div>
+					<ul th:each="titleListTwelve:${titleLists.get(11)}">
+						<li th:each="listTwelve:${titleListTwelve}"><a
+							th:href="@{'/calender/event_details/' + ${listTwelve.id}}"><span
+								th:text="|${listTwelve.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(12)}">13</div>
+					<ul th:each="titleListThirteen:${titleLists.get(12)}">
+						<li th:each="listThirteen:${titleListThirteen}"><a
+							th:href="@{'/calender/event_details/' + ${listThirteen.id}}"><span
+								th:text="|${listThirteen.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(13)}">14</div>
+					<ul th:each="titleListFourteen:${titleLists.get(13)}">
+						<li th:each="listFourteen:${titleListFourteen}"><a
+							th:href="@{'/calender/event_details/' + ${listFourteen.id}}"><span
+								th:text="|${listFourteen.title}|"></span></a></li>
+					</ul></td>
+			</tr>
+		</tbody>
+		<tbody>
+			<tr>
+				<td class="sun"><div class="date"
+						th:text="${obj.getMonthDay(14)}">15</div>
+					<ul th:each="titleListFifteen:${titleLists.get(14)}">
+						<li th:each="listFifteen:${titleListFourteen}"><a
+							th:href="@{'/calender/event_details/' + ${listFifteen.id}}"><span
+								th:text="|${listFifteen.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(15)}">16</div>
+
+					<ul th:each="titleListSixteen:${titleLists.get(15)}">
+						<li th:each="listSixteen:${titleListSixteen}"><a
+							th:href="@{'/calender/event_details/' + ${listSixteen.id}}"><span
+								th:text="|${listSixteen.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(16)}">17</div>
+
+					<ul th:each="titleListSeventeen:${titleLists.get(16)}">
+						<li th:each="listSeventeen:${titleListSeventeen}"><a
+							th:href="@{'/calender/event_details/' + ${listSeventeen.id}}"><span
+								th:text="|${listSeventeen.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(17)}">18</div>
+					<ul th:each="titleListEighteen:${titleLists.get(17)}">
+						<li th:each="listEighteen:${titleListEighteen}"><a
+							th:href="@{'/calender/event_details/' + ${listEighteen.id}}"><span
+								th:text="|${listEighteen.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(18)}">19</div>
+					<ul th:each="titleListNineteen:${titleLists.get(18)}">
+						<li th:each="listNineteen:${titleListNineteen}"><a
+							th:href="@{'/calender/event_details/' + ${listNineteen.id}}"><span
+								th:text="|${listNineteen.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(19)}">20</div>
+					<ul th:each="titleListTwenty:${titleLists.get(19)}">
+						<li th:each="listTwenty:${titleListTwenty}"><a
+							th:href="@{'/calender/event_details/' + ${listTwenty.id}}"><span
+								th:text="|${listTwenty.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(20)}">21</div>
+					<ul th:each="titleListTwentyOne:${titleLists.get(20)}">
+						<li th:each="listTwentyOne:${titleListTwentyOne}"><a
+							th:href="@{'/calender/event_details/' + ${listTwentyOne.id}}"><span
+								th:text="|${listTwentyOne.title}|"></span></a></li>
+					</ul></td>
+			</tr>
+		</tbody>
+		<tbody>
+			<tr>
+				<td class="sun"><div class="date"
+						th:text="${obj.getMonthDay(21)}">22</div>
+					<ul th:each="titleListTwentyTwo:${titleLists.get(21)}">
+						<li th:each="listTwentyTwo:${titleListTwentyTwo}"><a
+							th:href="@{'/calender/event_details/' + ${listTwentyTwo.id}}"><span
+								th:text="|${listTwentyTwo.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(22)}">23</div>
+					<ul th:each="titleListTwentyThree:${titleLists.get(22)}">
+						<li th:each="listTwentyThree:${titleListTwentyThree}"><a
+							th:href="@{'/calender/event_details/' + ${listTwentyThree.id}}"><span
+								th:text="|${listTwentyThree.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(23)}">24</div>
+					<ul th:each="titleListTwentyFour:${titleLists.get(23)}">
+						<li th:each="listTwentyFour:${titleListTwentyFour}"><a
+							th:href="@{'/calender/event_details/' + ${listTwentyFour.id}}"><span
+								th:text="|${listTwentyFour.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(24)}">25</div>
+					<ul th:each="titleListTwentyFive:${titleLists.get(24)}">
+						<li th:each="listTwentyFive:${titleListTwentyFive}"><a
+							th:href="@{'/calender/event_details/' + ${listTwentyFive.id}}"><span
+								th:text="|${listTwentyFive.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(25)}">26</div>
+					<ul th:each="titleListTwentySix:${titleLists.get(25)}">
+						<li th:each="listTwentySix:${titleListTwentySix}"><a
+							th:href="@{'/calender/event_details/' + ${listTwentySix.id}}"><span
+								th:text="|${listTwentySix.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(26)}">27</div>
+					<ul th:each="titleListTwentySeven:${titleLists.get(26)}">
+						<li th:each="listTwentySeven:${titleListTwentySeven}"><a
+							th:href="@{'/calender/event_details/' + ${listTwentySeven.id}}"><span
+								th:text="|${listTwentySeven.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(27)}">28</div>
+					<ul th:each="titleListTwentyEight:${titleLists.get(27)}">
+						<li th:each="listTwentyEight:${titleListTwentyEight}"><a
+							th:href="@{'/calender/event_details/' + ${listTwentyEight.id}}"><span
+								th:text="|${listTwentyEight.title}|"></span></a></li>
+					</ul></td>
+			</tr>
+		</tbody>
+		<tbody>
+			<tr>
+				<td class="sun"><div class="date"
+						th:text="${obj.getMonthDay(28)}">29</div>
+					<ul th:each="titleListTwentyNine:${titleLists.get(28)}">
+						<li th:each="listTwentyNine:${titleListTwentyNine}"><a
+							th:href="@{'/calender/event_details/' + ${listTwentyNine.id}}"><span
+								th:text="|${listTwentyNine.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(29)}">30</div>
+					<ul th:each="titleListThirty:${titleLists.get(29)}">
+						<li th:each="listThirty:${titleListThirty}"><a
+							th:href="@{'/calender/event_details/' + ${listThirty.id}}"><span
+								th:text="|${listThirty.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(30)}">31</div>
+
+					<ul th:each="titleListThirtyOne:${titleLists.get(30)}">
+						<li th:each="listThirtyOne:${titleListThirtyOne}"><a
+							th:href="@{'/calender/event_details/' + ${listThirtyOne.id}}"><span
+								th:text="|${listThirtyOne.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(31)}">32</div>
+					<ul th:each="titleListThirtyTwo:${titleLists.get(31)}">
+						<li th:each="listThirtyTwo:${titleListThirtyTwo}"><a
+							th:href="@{'/calender/event_details/' + ${listThirtyTwo.id}}"><span
+								th:text="|${listThirtyTwo.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(32)}">33</div>
+					<ul th:each="titleListThirtyThree:${titleLists.get(32)}">
+						<li th:each="listThirtyThree:${titleListThirtyThree}"><a
+							th:href="@{'/calender/event_details/' + ${listThirtyThree.id}}"><span
+								th:text="|${listThirtyThree.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(33)}">34</div>
+					<ul th:each="titleListThirtyFour:${titleLists.get(33)}">
+						<li th:each="listThirtyFour:${titleListThirtyFour}"><a
+							th:href="@{'/calender/event_details/' + ${listThirtyFour.id}}"><span
+								th:text="|${listThirtyFour.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(34)}">35</div>
+					<ul th:each="titleListThirtyFive:${titleLists.get(34)}">
+						<li th:each="listThirtyFive:${titleListThirtyFive}"><a
+							th:href="@{'/calender/event_details/' + ${listThirtyFive.id}}"><span
+								th:text="|${listThirtyFive.title}|"></span></a></li>
+					</ul></td>
+			</tr>
+		</tbody>
+		<tbody th:if="${weekIndex} == 7">
+			<tr>
+				<td class="sun"><div class="date"
+						th:text="${obj.getMonthDay(35)}"></div>
+					<ul th:each="titleListThirtySix:${titleLists.get(35)}">
+						<li th:each="listThirtySix:${titleListThirtySix}"><a
+							th:href="@{'/calender/event_details/' + ${listThirtySix.id}}"><span
+								th:text="|${listThirtySix.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(36)}"></div>
+					<ul th:each="titleListThirtySeven:${titleLists.get(36)}">
+						<li th:each="listThirtySeven:${titleListThirtySeven}"><a
+							th:href="@{'/calender/event_details/' + ${listThirtySeven.id}}"><span
+								th:text="|${listThirtySeven.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(37)}"></div>
+					<ul th:each="titleListThirtyFive:${titleLists.get(37)}">
+						<li th:each="listThirtyEight:${titleListThirtyEight}"><a
+							th:href="@{'/calender/event_details/' + ${listThirtyEight.id}}"><span
+								th:text="|${listThirtyEight.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(38)}"></div>
+					<ul th:each="titleListThirtyNine:${titleLists.get(38)}">
+						<li th:each="listThirtyNine:${titleListThirtyNine}"><a
+							th:href="@{'/calender/event_details/' + ${listThirtyNine.id}}"><span
+								th:text="|${listThirtyNine.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(39)}"></div>
+					<ul th:each="titleListThirtyForty:${titleLists.get(39)}">
+						<li th:each="listThirtyForty:${titleListThirtyForty}"><a
+							th:href="@{'/calender/event_details/' + ${listThirtyForty.id}}"><span
+								th:text="|${listThirtyForty.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(40)}"></div>
+					<ul th:each="titleListThirtyFive:${titleLists.get(40)}">
+						<li th:each="listFortyOne:${titleListFortyOne}"><a
+							th:href="@{'/calender/event_details/' + ${listFortyOne.id}}"><span
+								th:text="|${listThirtyFortyOne.title}|"></span></a></li>
+					</ul></td>
+				<td><div class="date" th:text="${obj.getMonthDay(41)}"></div>
+					<ul th:each="titleListFortyTwo:${titleLists.get(41)}">
+						<li th:each="listFortyTwo:${titleListFortyTwo}"><a
+							th:href="@{'/calender/event_details/' + ${listFortyTwo.id}}"><span
+								th:text="|${listFortyTwo.title}|"></span></a></li>
+					</ul></td>
+			</tr>
+		</tbody>
+
+	</table>
+
+</body>
+</html>

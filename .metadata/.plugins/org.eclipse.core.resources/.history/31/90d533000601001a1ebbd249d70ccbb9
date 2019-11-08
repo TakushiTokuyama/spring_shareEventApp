@@ -1,0 +1,38 @@
+package com.example;
+
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+
+import com.example.config.WebSecurityConfig;
+
+@RunWith(SpringRunner.class)
+@AutoConfigureMockMvc
+@SpringBootTest
+@ContextConfiguration(classes=WebSecurityConfig.class)
+public class SpringSecurityTest {
+
+
+	@Autowired
+	MockMvc mockMvc;
+
+	@Test
+	public void formLoginTest() throws Exception{
+		mockMvc.perform(
+		formLogin().user("a").password("a"))
+		.andExpect(status().isFound()).andExpect(redirectedUrl("/"));
+	}
+
+
+
+    }
+
+

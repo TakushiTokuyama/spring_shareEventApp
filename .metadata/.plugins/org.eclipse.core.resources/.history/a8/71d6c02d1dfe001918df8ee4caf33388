@@ -1,0 +1,17 @@
+package com.example.mapper;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.example.entity.Account;
+
+@Mapper
+public interface UserMapper {
+
+	Account findUsername(String username);
+
+	void saveUser(Account account);
+
+	Account findUser(Account account);
+
+}
+

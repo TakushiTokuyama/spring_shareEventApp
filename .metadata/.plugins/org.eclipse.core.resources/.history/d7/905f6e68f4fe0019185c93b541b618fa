@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>詳細</title>
+<style>
+header{
+margin-top:50px;
+	height:0px;
+	width:100%;
+}
+
+.contents{
+
+	height:500px;
+	width:100%;
+
+}
+
+.box3 {
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    color: #2c2c2f;
+    background: #cde4ff;
+    display:block;
+    width:200px;
+}
+.box3 p {
+    margin: 0;
+    padding: 0;
+}
+
+.contents h1{
+    padding:20px;
+	text-align:center;
+
+}
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+table {
+	border-spacing: 0;
+	border: 1px solid #CCC;
+	width: 100%;
+	width: 500px;
+	height: 300px;
+	margin:auto;
+}
+
+th {
+	border: 1px solid #CCC;
+	padding: 5px 10px;
+	width: 30%;
+	background-color: #f3fcff;
+}
+
+td {
+	width: 70%;
+	border: 1px solid #CCC;
+}
+
+.submit {
+	margin: auto;
+	text-align: center;
+	margin-right: 170px;
+	padding: 10px;
+}
+
+.menu li{
+	width:100%;
+	padding:20px;
+	font-size:20px;
+	font-family: 'Ubuntu', sans-serif;
+
+	border-left: 8px solid #474655;
+	border-top: 1px solid #474655;
+	border-right: 1px solid #474655;
+	border-bottom: 1px solid #474655;
+	background-color: #fff;
+}
+
+.menu{
+    width:150px;
+	height:100px;
+	float:right;
+
+}
+
+.menu{
+
+margin-right:50px;
+}
+
+li{
+
+list-style: none;
+
+}
+
+.link{
+
+	text-align:center;
+
+}
+
+
+.link li{
+	padding:10px;
+	margin-right:50px;
+	display:inline-block;
+}
+.joinList{
+
+	display:inline-block;
+	margin-left:100px;
+
+}
+
+.joinList p{
+
+	font-size:30px;
+
+}
+
+.joinList li{
+	font-size:30px;
+
+}
+</style>
+</head>
+<body>
+<header>
+	<div class ="menu">
+		<ul>
+			<li><a href="/calender/event">EventCalender</a></li>
+			<li><a href="/">Index</a></li>
+		</ul>
+	</div>
+
+	<div class="box3">
+<div class="joinList">
+	<div th:if="${login}">
+	<p>参加者リスト</p>
+	<ul th:each="participateList:${participateList}"><li th:text=${participateList.username}></li></ul>
+</div>
+<div th:unless="${join}">
+   <div th:if="${login}">
+   <div th:unless="${same}">
+	<form action = "/calender/event_details_join" method = "post">
+
+	<input type="submit" value = "参加">
+	<input type="hidden" name="username" th:value = "${loginUser}">
+	<input type="hidden" name="id" th:value = "${eventDetails.getId()}">
+	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+	</form>
+	</div>
+	</div>
+</div>
+<div th:if="${join}">
+<div th:if="${login}">
+   <div th:unless="${same}">
+<form action ="/calender/event_details_unjoin" method = "post">
+<input type="hidden" name="username" th:value = "${loginUser}">
+<input type="hidden" name="id" th:value = "${eventDetails.getId()}">
+	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+<input type="submit" value = "不参加">
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+
+
+<div class="contents">
+	<h1>イベント詳細</h1>
+	<table th:object="${eventDetails}">
+		<tbody>
+			<tr>
+				<th>登録者</th>
+				<td th:text="*{name}"></td>
+
+			</tr>
+			<tr>
+				<th>日付</th>
+				<td th:text="*{manageDay}">></td>
+			</tr>
+			<tr>
+				<th>開始時間</th>
+				<td th:text="*{startTime}">></td>
+			</tr>
+			<tr>
+				<th>終了時間</th>
+				<td th:text="*{EndTime}">></td>
+			</tr>
+			<tr>
+				<th>タイトル</th>
+				<td th:text="*{title}"></td>
+			</tr>
+			<tr>
+				<th>内容</th>
+				<td th:text="*{content}"></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<div class="link">
+		<div th:if="${same}">
+			<ul>
+				<li th:object="${eventDetails}"><a
+					th:href="@{'/calender/event_details_edit/' + *{id}}">編集</a></li>
+				<li th:object="${eventDetails}"><a
+					th:href="@{'/calender/event_details_delete/' + *{id}}">削除</a></li>
+			</ul>
+		</div>
+	</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>イベントカレンダー削除</title>
+<style>
+li{list-style:none;}
+textarea{width:300px;height:200px;}
+</style>
+</head>
+<body>
+<h1>イベントカレンダー削除</h1>
+<form action = "/business/manage_form" method = "post"  th:object="${formModel}">
+<ul>
+<li th:each="error : ${#fields.detailedErrors()}"
+					th:text="${error.message}" />
+<li>登録者：<input type="text" name="name" th:field="*{name}"/></li>
+<li>年：<input name="selectedYear" list="year" th:field="*{manageDay}">
+
+	<datalist id="october">
+		<option value="20191001"></option>
+		<option value="20191002"></option>
+		<option value="20191003"></option>
+	</datalist>
+
+</li>
+
+<li>月：<input name="selectedMonth" list="month" th:field="*{manageDay}">
+
+	<datalist id="october">
+		<option value="20191001"></option>
+		<option value="20191002"></option>
+		<option value="20191003"></option>
+	</datalist>
+
+</li>
+
+<li>日：<input name="selectedDay" list="day" th:field="*{manageDay}">
+
+	<datalist id="october">
+		<option value="20191001"></option>
+		<option value="20191002"></option>
+		<option value="20191003"></option>
+	</datalist>
+
+</li>
+<li>タイトル：<input type="text" name="title" th:field="*{title}"></li>
+<li>内容<textarea name = "memo" th:field="*{text}"></textarea></li>
+<li><input type="submit" value="編集"></li>
+</ul>
+</form>
+</body>
+</html>

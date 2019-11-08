@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<style>
+header{width:100%;height:100px;}
+
+header li{float:right; width:150px; list-style:none; margin-top:10px;}
+
+</style>
+<title>スケジュール</title>
+</head>
+<body>
+<header><ul>
+<li><a href="/business/manage_form">イベント登録</a></li>
+	<li><a href="/business/manage">カレンダー</a></li>
+	<li><a href="/login">ログイン</a></li>
+	</ul>
+	</header>
+
+<h1 th:text="|Login User:${usr}|">ログイン</h1>
+
+
+     <p>Login as: </p>
+    <form action="#" th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout" />
+    </form>
+
+<p th:text="${usr}"></p>
+<p th:text="${userDetails}"></p>
+<p th:text="${authentication}"></p>
+
+
+
+
+
+
+
+
+</body>
+</html>

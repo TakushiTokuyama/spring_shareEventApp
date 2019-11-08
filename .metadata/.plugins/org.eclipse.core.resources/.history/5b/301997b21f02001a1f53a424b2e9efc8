@@ -1,0 +1,30 @@
+package com.example.domain;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class CalenderEvents {
+
+	private List<ArrayList<CalenderEvent>> titleLists = new ArrayList<ArrayList<CalenderEvent>>();
+	
+	private ArrayList<Week> lists = new ArrayList<>();
+
+	public ArrayList<Week> getLists() {
+		return lists;
+	}
+
+	public void setLists(ArrayList<Week> lists) {
+		this.lists = lists;
+	}
+
+	public List<ArrayList<CalenderEvent>> getTitleLists() {
+		return titleLists;
+	}
+
+	public void setTitleLists(List<ArrayList<CalenderEvent>> titleLists) {
+		this.titleLists = titleLists;
+	}
+	
+	
+	
+}

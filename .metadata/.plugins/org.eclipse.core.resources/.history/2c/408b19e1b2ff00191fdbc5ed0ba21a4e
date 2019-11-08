@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.CalenderEventMapper">
+
+	<select id="save" resultType="com.example.domain.CalenderEvent">
+		insert into
+		schedule(name,manageDay,startTime,endTime,title,content)
+		values(#{name},#{manageDay},#{startTime},#{endTime},#{title},#{content})
+	</select>
+
+	<select id="findOne"
+		resultType="com.example.domain.CalenderEvent">
+		select manageDay from schedule where id = #{id}
+	</select>
+
+	<select id="findAll"
+		resultType="com.example.domain.CalenderEvent">
+		select * from schedule
+	</select>
+
+	<select id="findTitle"
+		resultType="com.example.domain.CalenderEvent">
+		select * from schedule where manageDay = #{manageDay}
+	</select>
+
+	<select id="findId"
+		resultType="com.example.domain.CalenderEvent">
+		select * from schedule where id = #{id}
+	</select>
+
+	<select id="update"
+		resultType="com.example.domain.CalenderEvent">
+		update schedule set
+		name=#{name},manageDay=#{manageDay},startTime=#{startTime},
+		endTime=#{endTime},title=#{title},content=#{content} where id = #{id}
+	</select>
+
+	<select id="delete"
+		resultType="com.example.domain.CalenderEvent">
+		delete from schedule where id = #{id}
+	</select>
+
+</mapper>

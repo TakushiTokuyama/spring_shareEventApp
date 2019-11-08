@@ -1,0 +1,37 @@
+package com.example.logic;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import org.springframework.http.HttpMethod;
+
+public class SelectedCalenderLogic {
+
+
+	private LocalDate calenderOfTheMonth;
+
+	private int calenderForOtherYears;
+	private int calenderForOtherMonths;
+
+	public String Selectedcalender(HttpMethod httpMethod , String selectedYear , String selectedMonth) {
+
+		if (httpMethod == HttpMethod.GET) {
+
+			calenderOfTheMonth = LocalDate.now();
+
+		} else {
+
+			calenderForOtherYears = Integer.parseInt(selectedYear);
+			calenderForOtherMonths = Integer.parseInt(selectedMonth);
+
+			calenderOfTheMonth = LocalDate.of(calenderForOtherYears, calenderForOtherMonths, 1);
+		}
+
+		DateTimeFormatter d = DateTimeFormatter.ofPattern("yyyy年MM月");
+		String selectedCalender = calenderOfTheMonth.format(d);
+
+		return selectedCalender;
+
+	}
+
+}

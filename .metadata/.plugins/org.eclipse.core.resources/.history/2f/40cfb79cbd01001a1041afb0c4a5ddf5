@@ -1,0 +1,21 @@
+package com.example.logic;
+
+import java.security.Principal;
+
+import org.springframework.web.servlet.ModelAndView;
+
+public class FindLoginUserLogic {
+
+	private String loginUser;
+
+	public FindLoginUserLogic(ModelAndView mav , Principal principal) {
+
+		if(principal != null) {
+
+			this.loginUser = principal.getName();
+
+		}
+
+	}
+
+}

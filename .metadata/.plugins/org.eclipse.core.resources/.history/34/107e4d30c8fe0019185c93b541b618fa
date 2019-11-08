@@ -1,0 +1,15 @@
+package com.example.mapper;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import com.example.domain.ParticipateEvent;
+
+@Mapper
+public interface ParticipateEventMapper {
+
+	void joinSave(@Param("id")int id,@Param("username")String username,@Param("join")String join);
+
+	ParticipateEvent findJoin(@Param("id")int id,@Param("username")String username,@Param("join")String join);
+
+}

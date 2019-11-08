@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.UserMapper">
+
+	<select id="findUsername" resultType="com.example.entity.Account">
+		select * from user where username = #{username}
+	</select>
+
+	<select id="saveUser" resultType="com.example.entity.Account">
+		insert into user(username,password)values(#{username},#{password})
+	</select>
+
+	<select id="findUser" resultType="com.example.entity.Account">
+		select * from user where username = #{username}
+	</select>
+
+</mapper>
