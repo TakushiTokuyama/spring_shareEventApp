@@ -24,7 +24,7 @@ background-color: #e5f6ff;
 }
 
 .menu{
-    width:150px;
+    width:170px;
 	height:100px;
 	float:right;
 
@@ -47,12 +47,12 @@ list-style: none;
 
 	<div class="menu">
 		<ul>
-			<li><a href="/calender/event_form">EventForm</a></li>
-			<li><a href="/calender/event">Calender</a></li>
-			<li><a href="/login">Login</a></li>
+			<li><a href="/calender/event_form">イベント登録</a></li>
+			<li><a href="/calender/event">カレンダー</a></li>
+			<li><a href="/login">ログイン</a></li>
 			<li><form action="/logout" method="post">
 			<input type="hidden" th:name="${_csrf.parameterName}"
-				th:value="${_csrf.token}" /> <input type="submit" value="Logout" />
+				th:value="${_csrf.token}" /> <input type="submit" value="ログアウト" />
 		</form></li>
 		</ul>
 	</div>
@@ -69,10 +69,6 @@ list-style: none;
 	<p>気に入ったイベントがあれば参加ボタンを押してください。</p>
 	</div>
 
-	<h1>やることリスト</h1>
-	<p>editにvalidate codeを減らす+奇麗に testcode </p>
-	<p>見た目奇麗に login validate  </p>
-	<p>自分のイベントリスト　グループ　定員 </p>
 
 </body>
 </html>
