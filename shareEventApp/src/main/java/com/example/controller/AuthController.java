@@ -64,6 +64,7 @@ public class AuthController {
 		Account account = new Account();
 
 		account.setUsername(username);
+
 		account.setPassword(password);
 
 		String message = resisterUserService.registerUser(account);

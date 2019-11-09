@@ -53,7 +53,7 @@ public class CalenderEventController {
 
 		model.addAttribute("loginUser", loginUser);
 
-		return "/calender/event_form";
+		return "calender/event_form";
 
 	}
 
@@ -72,7 +72,7 @@ public class CalenderEventController {
 
 		if (result.hasErrors()) {
 
-			return "/calender/event_form";
+			return "calender/event_form";
 
 		}
 
@@ -84,7 +84,7 @@ public class CalenderEventController {
 
 			model.addAttribute("error","正しい時間を入力してください");
 
-			return "/calender/event_form";
+			return "calender/event_form";
 
 		}
 
@@ -94,7 +94,7 @@ public class CalenderEventController {
 
 			model.addAttribute("next","次の日以降を入力して下さい");
 
-			return "/calender/event_form";
+			return "calender/event_form";
 		}
 
 		if (!result.hasErrors()) {
@@ -104,12 +104,11 @@ public class CalenderEventController {
 			return "redirect:/calender/event";
 		}
 
-		return "/calender/event_form";
+		return "calender/event_form";
 	}
 
 	@RequestMapping("/calender/event")
-	public ModelAndView manage(HttpServletRequest request, HttpMethod httpMethod, ModelAndView mav) {
-		mav.setViewName("calender/event");
+	public String manage(HttpServletRequest request, HttpMethod httpMethod, Model model) {
 
 		String selectedYear = request.getParameter("selectedYear");
 		String selectedMonth = request.getParameter("selectedMonth");
@@ -118,11 +117,11 @@ public class CalenderEventController {
 		//viewに表示するカレンダーの選択年月
 		String selectedCalender = calenderLogic.selectedCalender(httpMethod, selectedYear, selectedMonth);
 
-		mav.addObject("selectedCalender", selectedCalender);
+		model.addAttribute("selectedCalender", selectedCalender);
 
-		mav.addObject("selectYear",calenderLogic.selectYear());
+		model.addAttribute("selectYear",calenderLogic.selectYear());
 
-		mav.addObject("selectMonth",calenderLogic.selectMonth());
+		model.addAttribute("selectMonth",calenderLogic.selectMonth());
 
 		int currentYear = calenderLogic.selectedYear(httpMethod, selectedYear);
 
@@ -133,11 +132,11 @@ public class CalenderEventController {
 		//月の最初の曜日
 		int weekIndex = calenderLogic.weekIndex(currentYear, currentMonth);
 
-		mav.addObject("weekIndex", weekIndex);
+		model.addAttribute("weekIndex", weekIndex);
 		//カレンダーに表示させる日付
 		ArrayList<Week> calenderDays = calenderLogic.calenderDays(weekIndex, totalDay);
 
-		mav.addObject("calenderDays", calenderDays);
+		model.addAttribute("calenderDays", calenderDays);
 
 		CalenderEvents calenderEvents = new CalenderEvents();
 
@@ -164,9 +163,9 @@ public class CalenderEventController {
 			calenderEvents.setLists(new ArrayList<CalenderEvent>());
 		}
 
-		mav.addObject("titleLists", calenderEvents.getTitleLists());
+		model.addAttribute("titleLists", calenderEvents.getTitleLists());
 
-		return mav;
+		return "calender/event";
 
 	}
 
@@ -179,28 +178,24 @@ public class CalenderEventController {
 
 		if (principal != null) {
 
-			 String join ="参加";
+			ParticipateEvent findJoinResult = participateEventMapper.findJoin(id, principal.getName(), "参加");
 
-			 ParticipateEvent findResult = participateEventMapper.findJoin(id,principal.getName(),join);
+			mav.addObject("findJoinResult", findJoinResult);
 
-			 mav.addObject("join",findResult);
-			 mav.addObject("login","login");
+			mav.addObject("login", "login");
 
-			 List<ParticipateEvent> participateList = participateEventMapper.participateList(id);
+			mav.addObject("loginUser", principal.getName());
 
-			 mav.addObject("participateList",participateList);
-
-			final String loginUser = principal.getName();
-			final String user = eventDetails.get().getName();
-
-			mav.addObject("loginUser",loginUser);
-
-			if (loginUser.equals(user) == true) {
-				mav.addObject("same", "same");
+			if (principal.getName().equals(eventDetails.get().getName()) == true) {
+				mav.addObject("sameUser", "sameUser");
 			}
 		}
 
-		mav.addObject("map","http://maps.google.co.jp/maps?&output=embed&q="+eventDetails.get().getPlace());
+		List<ParticipateEvent> participateList = participateEventMapper.participateList(id);
+
+		mav.addObject("participateList", participateList);
+
+		mav.addObject("map", "http://maps.google.co.jp/maps?&output=embed&q=" + eventDetails.get().getPlace());
 
 		mav.addObject("eventDetails", eventDetails.get());
 		return mav;
@@ -209,9 +204,13 @@ public class CalenderEventController {
 	@GetMapping("/calender/event_details_edit/{id}")
 	public ModelAndView manage_details_editView(@ModelAttribute CalenderEvent calenderEvent, @PathVariable int id,
 			ModelAndView mav) {
+
 		mav.setViewName("calender/event_details_edit");
+
 		Optional<CalenderEvent> eventDetails = calenderEventMapper.findId(id);
+
 		mav.addObject("eventDetails", eventDetails);
+
 		return mav;
 
 	}
@@ -229,9 +228,13 @@ public class CalenderEventController {
 	@GetMapping("/calender/event_details_delete/{id}")
 	public ModelAndView manage_details_deleteView(@ModelAttribute CalenderEvent calenderEvent, @PathVariable int id,
 			ModelAndView mav) {
+
 		mav.setViewName("calender/event_details_delete");
+
 		Optional<CalenderEvent> eventDetails = calenderEventMapper.findId(id);
+
 		mav.addObject("eventDetails", eventDetails.get());
+
 		return mav;
 	}
 
@@ -240,8 +243,8 @@ public class CalenderEventController {
 	public ModelAndView manage_details_delete(@RequestParam int id) {
 
 		calenderEventMapper.delete(id);
-		participateEventMapper.deleteJoin(id);
 
+		participateEventMapper.deleteJoin(id);
 
 		return new ModelAndView("redirect:/calender/event");
 	}

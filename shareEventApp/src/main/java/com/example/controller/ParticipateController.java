@@ -27,49 +27,45 @@ public class ParticipateController {
 
 	@Transactional
 	@PostMapping("/calender/event_details_join")
-	public ModelAndView join(@ModelAttribute("username")String username,
-			@ModelAttribute("id")int id, Principal principal,ModelAndView mav) {
+	public ModelAndView join(@ModelAttribute("username") String username,
+			@ModelAttribute("id") int id, Principal principal, ModelAndView mav) {
+
 		mav.setViewName("calender/event_details");
 
-		String join = "参加";
+		participateEventMapper.join(id, username, "参加");
 
-	    participateEventMapper.join(id,username,join);
+		ParticipateEvent findJoinResult = participateEventMapper.findJoin(id, username, "参加");
 
-	    ParticipateEvent findResult = participateEventMapper.findJoin(id,username,join);
-
-	    mav.addObject("join",findResult);
+		mav.addObject("findJoinResult", findJoinResult);
 
 		Optional<CalenderEvent> eventDetails = calenderEventMapper.findId(id);
 
 		if (principal != null) {
 
-			mav.addObject("login","login");
+			mav.addObject("login", "login");
 
-			final String loginUser = principal.getName();
-			final String user = eventDetails.get().getName();
+			mav.addObject("loginUser", principal.getName());
 
-			mav.addObject("loginUser",loginUser);
-
-			if (loginUser.equals(user) == true) {
-				mav.addObject("same", "same");
+			if (principal.getName().equals(eventDetails.get().getName()) == true) {
+				mav.addObject("sameUser", "sameUser");
 			}
 		}
 
 		List<ParticipateEvent> participateList = participateEventMapper.participateList(id);
 
-	    mav.addObject("participateList",participateList);
+		mav.addObject("participateList", participateList);
 
 		mav.addObject("eventDetails", eventDetails.get());
 
-		mav.addObject("map","http://maps.google.co.jp/maps?&output=embed&q="+eventDetails.get().getPlace());
+		mav.addObject("map", "http://maps.google.co.jp/maps?&output=embed&q=" + eventDetails.get().getPlace());
 
 		return mav;
 	}
 
 	@Transactional
 	@PostMapping("/calender/event_details_unjoin")
-	public ModelAndView unjoin(@ModelAttribute(name="username")String username,
-			@ModelAttribute("id")int id,Principal principal,ModelAndView mav) {
+	public ModelAndView unjoin(@ModelAttribute(name = "username") String username,
+			@ModelAttribute("id") int id, Principal principal, ModelAndView mav) {
 
 		mav.setViewName("calender/event_details");
 
@@ -79,25 +75,22 @@ public class ParticipateController {
 
 		if (principal != null) {
 
-			mav.addObject("login","login");
+			mav.addObject("login", "login");
 
-			final String loginUser = principal.getName();
-			final String user = eventDetails.get().getName();
+			mav.addObject("loginUser", principal.getName());
 
-			mav.addObject("loginUser",loginUser);
-
-			if (loginUser.equals(user) == true) {
-				mav.addObject("same", "same");
+			if (principal.getName().equals(eventDetails.get().getName()) == true) {
+				mav.addObject("sameUser", "sameUser");
 			}
 		}
 
 		List<ParticipateEvent> participateList = participateEventMapper.participateList(id);
 
-	    mav.addObject("participateList",participateList);
+		mav.addObject("participateList", participateList);
 
 		mav.addObject("eventDetails", eventDetails.get());
 
-		mav.addObject("map","http://maps.google.co.jp/maps?&output=embed&q="+eventDetails.get().getPlace());
+		mav.addObject("map", "http://maps.google.co.jp/maps?&output=embed&q=" + eventDetails.get().getPlace());
 
 		return mav;
 	}
