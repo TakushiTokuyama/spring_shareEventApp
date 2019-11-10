@@ -104,7 +104,7 @@ list-style: none;
 
 	<div class="menu">
 		<ul>
-			<li><a href="/calender/event">EventCalender</a></li>
+			<li><a href="/calendar/event">Eventcalendar</a></li>
 			<li><a href="/">Index</a></li>
 		</ul>
 	</div>
@@ -148,7 +148,7 @@ list-style: none;
 <div class="submit">
 	<div class="link" th:object="${eventDetails}">
 
-		<form action="/calender/event_details_delete" method="post">
+		<form action="/calendar/eventDetailsDelete" method="post">
 
 			<input type="hidden" name="id" th:value=*{id}> <input
 				type="hidden" th:name="${_csrf.parameterName}"
@@ -158,9 +158,6 @@ list-style: none;
 </div>
 	</div>
 </div>
-
-
-
 
 </body>
 </html>

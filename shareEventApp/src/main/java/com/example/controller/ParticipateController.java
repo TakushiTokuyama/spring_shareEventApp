@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.domain.CalenderEvent;
+import com.example.domain.CalendarEvent;
 import com.example.domain.ParticipateEvent;
-import com.example.mapper.CalenderEventMapper;
+import com.example.mapper.CalendarEventMapper;
 import com.example.mapper.ParticipateEventMapper;
 
 @Controller
 public class ParticipateController {
 
 	@Autowired
-	CalenderEventMapper calenderEventMapper;
+	CalendarEventMapper calenderEventMapper;
 
 	@Autowired
 	ParticipateEventMapper participateEventMapper;
@@ -38,7 +38,7 @@ public class ParticipateController {
 
 		mav.addObject("findJoinResult", findJoinResult);
 
-		Optional<CalenderEvent> eventDetails = calenderEventMapper.findId(id);
+		Optional<CalendarEvent> eventDetails = calenderEventMapper.findId(id);
 
 		if (principal != null) {
 
@@ -71,7 +71,7 @@ public class ParticipateController {
 
 		participateEventMapper.unjoin(username);
 
-		Optional<CalenderEvent> eventDetails = calenderEventMapper.findId(id);
+		Optional<CalendarEvent> eventDetails = calenderEventMapper.findId(id);
 
 		if (principal != null) {
 

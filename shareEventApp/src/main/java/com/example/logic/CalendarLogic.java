@@ -9,12 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 
 import com.example.domain.Week;
-import com.example.mapper.CalenderEventMapper;
+import com.example.mapper.CalendarEventMapper;
 
-public class CalenderLogic {
+public class CalendarLogic {
 
 	@Autowired
-	CalenderEventMapper calenderEventMapper;
+	CalendarEventMapper calendarEventMapper;
 
 	//いつのカレンダーを表示するか？
 	public String selectedCalender(HttpMethod httpMethod , String selectedYear , String selectedMonth) {
@@ -124,9 +124,9 @@ public class CalenderLogic {
 		return weekIndex;
 	}
 
-	public ArrayList<Week> calenderDays(int weekIndex , int totalDay){
+	public ArrayList<Week> currentDays(int weekIndex , int totalDay){
 
-		ArrayList<Week> calenderDays = new ArrayList<>();
+		ArrayList<Week> currentDays = new ArrayList<>();
 
 		Week week = new Week();
 		int weekDay = 0;
@@ -158,42 +158,55 @@ public class CalenderLogic {
 
 				}
 
-				calenderDays.add(week);
+				currentDays.add(week);
 
-		return calenderDays;
+		return currentDays;
 
 	}
 
 	/*
-	public List<List<CalenderEvent>> findEventTitleLists(int totalDay , int weekIndex , int currentYear , int currentMonth){
+	public List<List<CalendarEvent>> findEventTitleLists(int totalDays , int weekIndex , int currentYear , int currentMonth){
 
-		CalenderEvents calenderEvents = new CalenderEvents();
+		CalendarEvents calendarEvents = new CalendarEvents();
 
-		for (int day = 1, a = 0; day <= totalDay; day++) {
+		for (int i = 0; i < weekIndex - 1; i++) {
+			calendarEvents.setLists(new ArrayList<CalendarEvent>());
+		}
 
+		for (int day = 1 ; day <= totalDays; day++) {
 			//日付をyyyyMMDDに変更
 			LocalDate c = LocalDate.of(currentYear, currentMonth, day);
 			DateTimeFormatter da = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			String selectedDay = c.format(da);
 			//最初の週
-			while (a < 1) {
-				for (int i = 0; i < weekIndex - 1; i++) {
-					calenderEvents.setLists(new ArrayList<CalenderEvent>());
-					a++;
-				}
-				a++;
-			}
-
-			calenderEvents.setLists(calenderEventMapper.findTitle(selectedDay));
-
+			calendarEvents.setLists(calendarEventMapper.findTitle(selectedDay));
 		}
+
 		//最後の週
-		for (int i = 0; i + weekIndex + totalDay <= 42; i++) {
-			calenderEvents.setLists(new ArrayList<CalenderEvent>());
+		for (int i = 0; i + weekIndex + totalDays <= 42; i++) {
+			calendarEvents.setLists(new ArrayList<CalendarEvent>());
 		}
 
-		return calenderEvents.getTitleLists();
+		return calendarEvents.getTitleLists();
+		*/
+
+	public String selectedDays(int currentYear , int currentMonth , int day) {
+
+		LocalDate c = LocalDate.of(currentYear, currentMonth, day);
+		DateTimeFormatter da = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String selectedDays = c.format(da);
+
+		return selectedDays;
 
 	}
-*/
+
 }
+
+/*
+ * //日付をyyyyMMDDに変更
+			LocalDate c = LocalDate.of(currentYear, currentMonth, day);
+			DateTimeFormatter da = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			String selectedDay = c.format(da);
+			//最初の週
+ * */
+

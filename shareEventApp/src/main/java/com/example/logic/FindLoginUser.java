@@ -4,7 +4,7 @@ import java.security.Principal;
 
 import org.springframework.ui.Model;
 
-public class FindLoginUserLogic {
+public class FindLoginUser {
 
 	private String loginUser;
 

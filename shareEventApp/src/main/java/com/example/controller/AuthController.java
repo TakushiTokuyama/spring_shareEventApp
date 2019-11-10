@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.logic.FindLoginUserLogic;
+import com.example.logic.FindLoginUser;
 import com.example.loginUser.Account;
 import com.example.loginUser.RegisterUserService;
 
@@ -23,7 +23,7 @@ public class AuthController {
 	@GetMapping("/")
 	public String index(Model model, Principal principal) {
 
-		FindLoginUserLogic findLoginUserLogic = new FindLoginUserLogic();
+		FindLoginUser findLoginUserLogic = new FindLoginUser();
 
 		String loginUser = findLoginUserLogic.FindLoginUser(model, principal);
 
