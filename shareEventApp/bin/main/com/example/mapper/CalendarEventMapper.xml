@@ -2,43 +2,43 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.mapper.CalenderEventMapper">
+<mapper namespace="com.example.mapper.CalendarEventMapper">
 
-	<select id="save" resultType="com.example.domain.CalenderEvent">
+	<select id="save" resultType="com.example.domain.CalendarEvent">
 		insert into
 		events(name,eventDay,startTime,endTime,title,content,place)
 		values(#{name},#{eventDay},#{startTime},#{endTime},#{title},#{content},#{place})
 	</select>
 
 	<select id="findOne"
-		resultType="com.example.domain.CalenderEvent">
+		resultType="com.example.domain.CalendarEvent">
 		select eventDay from events where id = #{id}
 	</select>
 
 	<select id="findAll"
-		resultType="com.example.domain.CalenderEvent">
+		resultType="com.example.domain.CalendarEvent">
 		select * from events
 	</select>
 
 	<select id="findTitle"
-		resultType="com.example.domain.CalenderEvent">
+		resultType="com.example.domain.CalendarEvent">
 		select * from events where eventDay = #{selectedDay}
 	</select>
 
 	<select id="findId"
-		resultType="com.example.domain.CalenderEvent">
+		resultType="com.example.domain.CalendarEvent">
 		select * from events where id = #{id}
 	</select>
 
 	<select id="update"
-		resultType="com.example.domain.CalenderEvent">
+		resultType="com.example.domain.CalendarEvent">
 		update events set
 		name=#{name},eventDay=#{eventDay},startTime=#{startTime},
 		endTime=#{endTime},title=#{title},content=#{content},place=#{place} where id = #{id}
 	</select>
 
 	<select id="delete"
-		resultType="com.example.domain.CalenderEvent">
+		resultType="com.example.domain.CalendarEvent">
 		delete from events where id = #{id}
 	</select>
 

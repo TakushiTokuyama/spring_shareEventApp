@@ -1,8 +1,6 @@
 package com.example.controller;
 
 import java.security.Principal;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -24,166 +22,119 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.domain.CalenderEvent;
-import com.example.domain.CalenderEvents;
+import com.example.domain.CalendarEvent;
+import com.example.domain.CalendarEvents;
 import com.example.domain.ParticipateEvent;
-import com.example.domain.Week;
-import com.example.logic.CalenderLogic;
-import com.example.logic.Event_formValidate;
-import com.example.logic.FindLoginUserLogic;
-import com.example.mapper.CalenderEventMapper;
+import com.example.logic.CalendarLogic;
+import com.example.logic.EventFormValidation;
+import com.example.logic.FindLoginUser;
+import com.example.mapper.CalendarEventMapper;
 import com.example.mapper.ParticipateEventMapper;
 
 @Controller
-public class CalenderEventController {
+public class CalendarEventController {
 
 	@Autowired
-	CalenderEventMapper calenderEventMapper;
+	CalendarEventMapper calendarEventMapper;
 
 	@Autowired
 	ParticipateEventMapper participateEventMapper;
 
-	@GetMapping("/calender/event_form")
-	public String event_form(Principal principal, @ModelAttribute("formModel") CalenderEvent calenderEvent,
+	@GetMapping("/calendar/eventForm")
+	public String eventFormView(Principal principal, @ModelAttribute("formModel") CalendarEvent calendarEvent,
 			Model model) {
 
-		FindLoginUserLogic findLoginUserLogic = new FindLoginUserLogic();
+		FindLoginUser findLoginUser = new FindLoginUser();
+		model.addAttribute("loginUser", findLoginUser.FindLoginUser(model, principal));
 
-		String loginUser = findLoginUserLogic.FindLoginUser(model, principal);
-
-		model.addAttribute("loginUser", loginUser);
-
-		return "calender/event_form";
-
+		return "calendar/eventForm";
 	}
 
-	@PostMapping("/calender/event_form")
+	@PostMapping("/calendar/eventForm")
 	@Transactional(readOnly = false)
-	public String event_form_Result(Principal principal,
-			@ModelAttribute("formModel") @Validated CalenderEvent calenderEvent,
+	public String eventFormCreate(Principal principal,
+			@ModelAttribute("formModel") @Validated CalendarEvent calendarEvent,
 			BindingResult result,
 			Model model) {
 
-		FindLoginUserLogic findLoginUser = new FindLoginUserLogic();
+		FindLoginUser findLoginUser = new FindLoginUser();
 
-		String loginUser = findLoginUser.FindLoginUser(model, principal);
-
-		model.addAttribute("loginUser", loginUser);
+		model.addAttribute("loginUser", findLoginUser.FindLoginUser(model, principal));
 
 		if (result.hasErrors()) {
-
-			return "calender/event_form";
-
+			return "calendar/eventForm";
 		}
 
-		Event_formValidate event_formValidate = new Event_formValidate();
+		EventFormValidation efValidate = new EventFormValidation();
 
-		boolean timeError = event_formValidate.timeValidate(calenderEvent);
-
-		if(timeError == true) {
-
+		if(efValidate.timeValidate(calendarEvent)) {
 			model.addAttribute("error","正しい時間を入力してください");
-
-			return "calender/event_form";
-
+			return "calendar/eventForm";
 		}
 
-		boolean dayError = event_formValidate.dayValidate(calenderEvent);
-
-		if(dayError == true) {
-
+		if(efValidate.dayValidate(calendarEvent)) {
 			model.addAttribute("next","次の日以降を入力して下さい");
-
-			return "calender/event_form";
+			return "calendar/eventForm";
 		}
 
 		if (!result.hasErrors()) {
-
-			calenderEventMapper.save(calenderEvent);
-
-			return "redirect:/calender/event";
+			calendarEventMapper.save(calendarEvent);
+			return "redirect:/calendar/event";
 		}
-
-		return "calender/event_form";
+		return "calendar/eventForm";
 	}
 
-	@RequestMapping("/calender/event")
-	public String manage(HttpServletRequest request, HttpMethod httpMethod, Model model) {
+	@RequestMapping("/calendar/event")
+	public String event(HttpServletRequest request, HttpMethod httpMethod, Model model) {
 
-		String selectedYear = request.getParameter("selectedYear");
-		String selectedMonth = request.getParameter("selectedMonth");
-
-		CalenderLogic calenderLogic = new CalenderLogic();
+		CalendarLogic calendarLogic = new CalendarLogic();
 		//viewに表示するカレンダーの選択年月
-		String selectedCalender = calenderLogic.selectedCalender(httpMethod, selectedYear, selectedMonth);
+		model.addAttribute("selectedcalendar", calendarLogic.selectedCalender(httpMethod, request.getParameter("selectedYear"), request.getParameter("selectedMonth")));
+		model.addAttribute("selectYear",calendarLogic.selectYear());
+		model.addAttribute("selectMonth",calendarLogic.selectMonth());
 
-		model.addAttribute("selectedCalender", selectedCalender);
-
-		model.addAttribute("selectYear",calenderLogic.selectYear());
-
-		model.addAttribute("selectMonth",calenderLogic.selectMonth());
-
-		int currentYear = calenderLogic.selectedYear(httpMethod, selectedYear);
-
-		int currentMonth = calenderLogic.selectedMonth(httpMethod, selectedMonth);
+		int currentYear = calendarLogic.selectedYear(httpMethod, request.getParameter("selectedYear"));
+		int currentMonth = calendarLogic.selectedMonth(httpMethod, request.getParameter("selectedMonth"));
 
 		//表示する月の合計日数を調べる
-		int totalDay = calenderLogic.totalDay(currentYear, currentMonth);
+		int totalDays = calendarLogic.totalDay(currentYear, currentMonth);
 		//月の最初の曜日
-		int weekIndex = calenderLogic.weekIndex(currentYear, currentMonth);
+		int weekIndex = calendarLogic.weekIndex(currentYear, currentMonth);
 
 		model.addAttribute("weekIndex", weekIndex);
-		//カレンダーに表示させる日付
-		ArrayList<Week> calenderDays = calenderLogic.calenderDays(weekIndex, totalDay);
+		//カレンダーに表示させる現在の月の日数
+		model.addAttribute("currentDays", calendarLogic.currentDays(weekIndex, totalDays));
 
-		model.addAttribute("calenderDays", calenderDays);
-
-		CalenderEvents calenderEvents = new CalenderEvents();
-
-		for (int day = 1, a = 0; day <= totalDay; day++) {
-
-			//日付をyyyyMMDDに変更
-			LocalDate c = LocalDate.of(currentYear, currentMonth, day);
-			DateTimeFormatter da = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-			String selectedDay = c.format(da);
-			//最初の週
-			while (a < 1) {
-				for (int i = 0; i < weekIndex - 1; i++) {
-					calenderEvents.setLists(new ArrayList<CalenderEvent>());
-					a++;
-				}
-				a++;
-			}
-
-				calenderEvents.setLists(calenderEventMapper.findTitle(selectedDay));
-
+		CalendarEvents calendarEvents = new CalendarEvents();
+		//最初の週
+		for (int i = 0; i < weekIndex - 1; i++) {
+			calendarEvents.setLists(new ArrayList<CalendarEvent>());
+		}
+		//2.3.4週
+		for (int day = 1 ; day <= totalDays; day++) {
+				calendarEvents.setLists(calendarEventMapper.findTitle(calendarLogic.selectedDays(currentYear, currentMonth, day)));
 		}
 		//最後の週
-		for (int i = 0; i + weekIndex + totalDay <= 42; i++) {
-			calenderEvents.setLists(new ArrayList<CalenderEvent>());
+		for (int i = 0; i + weekIndex + totalDays <= 42; i++) {
+			calendarEvents.setLists(new ArrayList<CalendarEvent>());
 		}
 
-		model.addAttribute("titleLists", calenderEvents.getTitleLists());
+		model.addAttribute("titleLists", calendarEvents.getTitleLists());
 
-		return "calender/event";
-
+		return "calendar/event";
 	}
 
-	@GetMapping("/calender/event_details/{id}")
-	public ModelAndView manage_details(@ModelAttribute CalenderEvent calenderEvent, @PathVariable int id,
+	@GetMapping("/calendar/eventDetails/{id}")
+	public ModelAndView EventDetailsView(@ModelAttribute CalendarEvent calendarEvent, @PathVariable int id,
 			Principal principal, ModelAndView mav) {
-		mav.setViewName("calender/event_details");
+		mav.setViewName("calendar/eventDetails");
 
-		Optional<CalenderEvent> eventDetails = calenderEventMapper.findId(id);
+		Optional<CalendarEvent> eventDetails = calendarEventMapper.findId(id);
 
 		if (principal != null) {
 
-			ParticipateEvent findJoinResult = participateEventMapper.findJoin(id, principal.getName(), "参加");
-
-			mav.addObject("findJoinResult", findJoinResult);
-
+			mav.addObject("findJoinResult", participateEventMapper.findJoin(id, principal.getName(), "参加"));
 			mav.addObject("login", "login");
-
 			mav.addObject("loginUser", principal.getName());
 
 			if (principal.getName().equals(eventDetails.get().getName()) == true) {
@@ -191,62 +142,54 @@ public class CalenderEventController {
 			}
 		}
 
-		List<ParticipateEvent> participateList = participateEventMapper.participateList(id);
+			List<ParticipateEvent> participateList = participateEventMapper.participateList(id);
 
-		mav.addObject("participateList", participateList);
+			mav.addObject("participateList", participateList);
+			mav.addObject("map", "http://maps.google.co.jp/maps?&output=embed&q=" + eventDetails.get().getPlace());
+			mav.addObject("eventDetails", eventDetails.get());
 
-		mav.addObject("map", "http://maps.google.co.jp/maps?&output=embed&q=" + eventDetails.get().getPlace());
-
-		mav.addObject("eventDetails", eventDetails.get());
-		return mav;
+			return mav;
 	}
 
-	@GetMapping("/calender/event_details_edit/{id}")
-	public ModelAndView manage_details_editView(@ModelAttribute CalenderEvent calenderEvent, @PathVariable int id,
+	@GetMapping("/calendar/eventDetailsEdit/{id}")
+	public ModelAndView eventDetailsEditView(@ModelAttribute CalendarEvent calendarEvent, @PathVariable int id,
 			ModelAndView mav) {
+		mav.setViewName("calendar/eventDetailsEdit");
 
-		mav.setViewName("calender/event_details_edit");
-
-		Optional<CalenderEvent> eventDetails = calenderEventMapper.findId(id);
-
-		mav.addObject("eventDetails", eventDetails);
+		mav.addObject("eventDetails", calendarEventMapper.findId(id));
 
 		return mav;
-
 	}
 
-	@PostMapping("/calender/event_details_edit")
+	@PostMapping("/calendar/eventDetailsEdit")
 	@Transactional(readOnly = false)
-	public ModelAndView manage_details_edit(@ModelAttribute("eventDetails") CalenderEvent calenderEvent,
+	public ModelAndView eventDetailsEdit(@ModelAttribute("eventDetails") CalendarEvent calendarEvent,
 			ModelAndView mav) {
 
-		calenderEventMapper.update(calenderEvent);
+		calendarEventMapper.update(calendarEvent);
 
-		return new ModelAndView("redirect:/calender/event");
+		return new ModelAndView("redirect:/calendar/event");
 	}
 
-	@GetMapping("/calender/event_details_delete/{id}")
-	public ModelAndView manage_details_deleteView(@ModelAttribute CalenderEvent calenderEvent, @PathVariable int id,
+	@GetMapping("/calendar/eventDetailsDelete/{id}")
+	public ModelAndView eventDetailsDeleteView(@ModelAttribute CalendarEvent calendarEvent, @PathVariable int id,
 			ModelAndView mav) {
+		mav.setViewName("calendar/eventDetailsDelete");
 
-		mav.setViewName("calender/event_details_delete");
-
-		Optional<CalenderEvent> eventDetails = calenderEventMapper.findId(id);
-
+		Optional<CalendarEvent> eventDetails = calendarEventMapper.findId(id);
 		mav.addObject("eventDetails", eventDetails.get());
 
 		return mav;
 	}
 
-	@PostMapping(value = "/calender/event_details_delete")
+	@PostMapping(value = "/calendar/eventDetailsDelete")
 	@Transactional(readOnly = false)
-	public ModelAndView manage_details_delete(@RequestParam int id) {
+	public ModelAndView eventDetailsDelete(@RequestParam int id) {
 
-		calenderEventMapper.delete(id);
-
+		calendarEventMapper.delete(id);
 		participateEventMapper.deleteJoin(id);
 
-		return new ModelAndView("redirect:/calender/event");
+		return new ModelAndView("redirect:/calendar/event");
 	}
 
 }

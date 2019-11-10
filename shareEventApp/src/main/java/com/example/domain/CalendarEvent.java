@@ -3,7 +3,7 @@ package com.example.domain;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-public class CalenderEvent {
+public class CalendarEvent {
 
 	private int id;
 

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8" />
-<title>EventCalender</title>
+<title>Eventcalendar</title>
 <style>
 
 header{
@@ -163,14 +163,14 @@ footer p{
 	<div class="menu">
 		<ul>
 			<li><a href="/">Index</a></li>
-			<li><a href="/calender/event">カレンダー</a></li>
+			<li><a href="/calendar/event">カレンダー</a></li>
 		</ul>
 	</div>
 <div class="main"></div>
 <div class="main-contents">
 
 
-	<form action="/calender/event_form" method="post" th:object="${formModel}">
+	<form action="/calendar/eventForm" method="post" th:object="${formModel}">
 
 					<div class="mainuser">
 					<p th:text="|主催者  ${loginUser}|"></p>

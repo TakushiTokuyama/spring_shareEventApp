@@ -3,27 +3,27 @@ package com.example.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CalenderEvents {
+public class CalendarEvents {
 
-	private List<List<CalenderEvent>> titleLists = new ArrayList<List<CalenderEvent>>();
+	private List<List<CalendarEvent>> titleLists = new ArrayList<List<CalendarEvent>>();
 
-	private List<CalenderEvent> lists = new ArrayList<>();
+//	private List<CalendarEvent> lists = new ArrayList<>();
 
-	public List<CalenderEvent> getLists() {
-		return lists;
+//	public List<CalendarEvent> getLists() {
+//		return lists;
+//	}
+
+	public void setLists(List<CalendarEvent> lists) {
+		titleLists.add(lists);
 	}
 
-	public void setLists(List<CalenderEvent> lists) {
-		this.titleLists.add(lists);
-	}
-
-	public List<List<CalenderEvent>> getTitleLists() {
+	public List<List<CalendarEvent>> getTitleLists() {
 		return titleLists;
 	}
 
-	public void setTitleLists(List<List<CalenderEvent>> titleLists) {
-		this.titleLists = titleLists;
-	}
+//	public void setTitleLists(List<List<CalendarEvent>> titleLists) {
+//		this.titleLists = titleLists;
+//	}
 
 
 

@@ -6,22 +6,22 @@ import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.example.domain.CalenderEvent;
+import com.example.domain.CalendarEvent;
 
 @Mapper
-public interface CalenderEventMapper {
+public interface CalendarEventMapper {
 
-	List<CalenderEvent> findOne(int id);
+	List<CalendarEvent> findOne(int id);
 
-	Optional<CalenderEvent> findId(int id);
+	Optional<CalendarEvent> findId(int id);
 
-	List<CalenderEvent> findAll();
+	List<CalendarEvent> findAll();
 
-	List<CalenderEvent> findTitle(@Param("selectedDay")String selectedDay);
+	List<CalendarEvent> findTitle(@Param("selectedDay")String selectedDay);
 
-	void save(CalenderEvent calenderEvent);
+	void save(CalendarEvent calendarEvent);
 
-	void update(CalenderEvent calenderEvent);
+	void update(CalendarEvent calendarEvent);
 
 	void delete(int id);
 

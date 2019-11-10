@@ -3,11 +3,11 @@ package com.example.logic;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import com.example.domain.CalenderEvent;
+import com.example.domain.CalendarEvent;
 
-public class Event_formValidate {
+public class EventFormValidation {
 
-	public boolean timeValidate(CalenderEvent calenderEvent) {
+	public boolean timeValidate(CalendarEvent calenderEvent) {
 
 		String startHour = calenderEvent.getStartTime().substring(0,2);
 
@@ -31,7 +31,7 @@ public class Event_formValidate {
 
 
 
-public boolean dayValidate(CalenderEvent calenderEvent){
+public boolean dayValidate(CalendarEvent calenderEvent){
 
 	LocalDate today = LocalDate.now();
 
