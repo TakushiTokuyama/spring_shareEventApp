@@ -23,16 +23,11 @@ public class AuthController {
 	@GetMapping("/")
 	public String index(Model model, Principal principal) {
 
-		FindLoginUser findLoginUserLogic = new FindLoginUser();
-
-		String loginUser = findLoginUserLogic.FindLoginUser(model, principal);
+		FindLoginUser findLoginUser = new FindLoginUser();
 
 		if (principal != null) {
-
-			model.addAttribute("loginUser", loginUser);
-
+			model.addAttribute("loginUser", findLoginUser.FindLoginUser(model, principal));
 			return "index";
-
 		}
 		return "index";
 	}
@@ -47,7 +42,6 @@ public class AuthController {
 	public String login_error(Model model) {
 
 		model.addAttribute("loginError", true);
-
 		return "login";
 	}
 
@@ -64,13 +58,9 @@ public class AuthController {
 		Account account = new Account();
 
 		account.setUsername(username);
-
 		account.setPassword(password);
 
-		String message = resisterUserService.registerUser(account);
-
-		model.addAttribute("message", message);
-
+		model.addAttribute("message", resisterUserService.registerUser(account));
 		return "login";
 	}
 
