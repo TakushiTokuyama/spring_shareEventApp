@@ -1,0 +1,158 @@
+header {
+	height: 50px;
+}
+
+.global {
+	height: 900px;
+	position: relative;
+}
+
+.mainArea {
+	position: absolute;
+	height: 800px;
+	width: 400px;
+	top: 50px;
+	left: 400px;
+	z-index: 10;
+	border: solid 2px #ccc;
+	padding: 25px;
+	background-color: #e5f6ff;
+	border-radius: 3px;
+}
+
+.mainContents {
+	position: absolute;
+	top: 50px;
+	left: 420px;
+	z-index: 15;
+}
+
+.mainContents h1 {
+	font-family: arial, sans-serif;
+	padding: 15px 0px 5px 0px;
+	font-size: 25px;
+	border-bottom: 1px solid #383232;
+}
+
+.mainContents p {
+	font-family: arial, sans-serif;
+	padding: 15px 0px 10px 0px;
+	font-size: 20px;
+}
+
+.details {
+	width: 410px;
+}
+
+.mapContents {
+	position: absolute;
+	top: 200px;
+	left: 900px;
+	z-index: 20;
+}
+
+.mapContents h1 {
+	font-family: arial, sans-serif;
+	padding: 15px 0px 5px 0px;
+	font-size: 25px;
+	border-bottom: 1px solid #383232;
+}
+
+.mapContents p {
+	font-family: arial, sans-serif;
+	padding: 15px 0px 10px 0px;
+	font-size: 20px;
+}
+
+.mapArea {
+	position: absolute;
+	height: 650px;
+	width: 430px;
+	top: 200px;
+	left: 890px;
+	z-index: 10;
+	border: solid 2px #ccc;
+	padding: 25px;
+	background-color: #e5f6ff;
+	border-radius: 3px;
+}
+
+.participateList {
+	padding: 8px 20px;
+	color: #2c2c2f;
+	background: #e5f6ff;
+	border: solid 2px #ccc;
+	width: 300px;
+	text-align: center;
+}
+
+.participateList h1 {
+	font-family: arial, sans-serif;
+	font-size: 25px;
+}
+
+.participateList li {
+	font-family: arial, sans-serif;
+	font-size: 20px;
+	list-style: none;
+}
+
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+.sideMenu {
+	width: 150px;
+	height: 100px;
+	float: right;
+	margin-right: 50px;
+}
+
+.sideMenu li {
+	width: 100%;
+	padding: 20px;
+	font-size: 20px;
+	font-family: 'Ubuntu', sans-serif;
+	border-left: 3px solid #474655;
+	border-top: 1px solid #474655;
+	border-right: 1px solid #474655;
+	border-bottom: 1px solid #474655;
+	background-color: #fff;
+	list-style: none;
+}
+
+.link {
+	position: absolute;
+	left: 920px;
+	top: 100px;
+}
+
+.link li {
+	list-style: none;
+	font-size: 20px;
+	display: block;
+	width: 100px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+	border: solid 2px #ccc;
+	margin-right: 20px;
+	float: right;
+	background: #e5f6ff;
+}
+
+.link a {
+	text-decoration: none;
+}
+
+footer {
+	height: 50px;
+	width: 100%;
+}
+
+footer p {
+	text-align: right;
+	margin-top: 10px;
+	margin-right: 10px;
+}
