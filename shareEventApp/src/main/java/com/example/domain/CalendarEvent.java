@@ -6,9 +6,8 @@ import javax.validation.constraints.Size;
 public class CalendarEvent {
 
 	private int id;
-
+	@Size(min = 0, max = 20, message = "0-20文字")
 	private String name;
-	@Size(min = 0, max = 30, message = "0-30文字")
 	@NotEmpty(message = "空白は不可")
 	private String eventDay;
 	@NotEmpty(message = "空白は不可")
@@ -16,10 +15,11 @@ public class CalendarEvent {
 	@NotEmpty(message = "空白は不可")
 	private String endTime;
 	@NotEmpty(message = "空白は不可")
+	@Size(min = 0, max = 20, message = "0-20文字")
 	private String title;
-	@Size(min = 0, max = 500, message = "0-500文字")
+	@Size(min = 0, max = 160, message = "0-160文字")
 	private String content;
-	@Size(min = 0, max = 50, message = "0-50文字")
+	@Size(min = 0, max = 20, message = "0-20文字")
 	@NotEmpty(message = "空白は不可")
 	private String place;
 
