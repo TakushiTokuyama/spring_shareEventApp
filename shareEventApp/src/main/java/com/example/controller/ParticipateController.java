@@ -24,10 +24,10 @@ public class ParticipateController {
 	ParticipateEventMapper participateEventMapper;
 
 	@Transactional
-	@PostMapping("/calender/eventDetailsJoin")
+	@PostMapping("/calendar/eventDetailsJoin")
 	public ModelAndView join(@ModelAttribute("username") String username,
 			@ModelAttribute("id") int id, Principal principal, ModelAndView mav) {
-		mav.setViewName("calender/event_details");
+		mav.setViewName("calendar/eventDetails");
 
 		participateEventMapper.join(id, username, "参加");
 
@@ -53,10 +53,10 @@ public class ParticipateController {
 	}
 
 	@Transactional
-	@PostMapping("/calender/eventDetailsUnjoin")
+	@PostMapping("/calendar/eventDetailsUnjoin")
 	public ModelAndView unjoin(@ModelAttribute(name = "username") String username,
 			@ModelAttribute("id") int id, Principal principal, ModelAndView mav) {
-		mav.setViewName("calender/event_details");
+		mav.setViewName("calendar/eventDetails");
 
 		participateEventMapper.unjoin(username);
 
