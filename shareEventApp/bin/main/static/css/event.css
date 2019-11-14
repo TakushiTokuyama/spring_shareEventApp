@@ -1,0 +1,105 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+.global {
+	height: 970px;
+	position: relative;
+}
+
+.titleList {display;block;
+	height: 70px;
+	position: relative;
+	left: 200px;
+}
+
+.titleList li {
+	float: left;
+	margin-right: 20px;
+	font-size: 40px;
+}
+
+header {
+	height: 50px;
+}
+
+table {
+	position: relative;
+	left: 150px;
+}
+
+.sun {
+	color: red;
+	background-color: #f2dede
+}
+
+.calendarTable th {
+	background-color: #EBE9E3;
+	border: 1px solid #CCC;
+}
+
+.calendarTable td {
+	width: 130px;
+	border: 1px solid #CCC;
+}
+
+td ul {
+	padding: 0px;
+	margin: 1px 0px;
+}
+
+span {
+	text-align: start;
+}
+
+.date {
+	font-size: 18px;
+	display: inline;
+}
+
+.events {
+	height: 150px;
+	overflow: auto;
+}
+
+li {
+	list-style: none;
+}
+
+.sideMenu {
+	width: 150px;
+	height: 100px;
+	float: right;
+	margin-right: 50px;
+}
+
+.sideMenu li {
+	width: 100%;
+	padding: 20px;
+	font-size: 20px;
+	font-family: 'Ubuntu', sans-serif;
+	border-left: 3px solid #474655;
+	border-top: 1px solid #474655;
+	border-right: 1px solid #474655;
+	border-bottom: 1px solid #474655;
+	background-color: #fff;
+	list-style: none;
+}
+
+footer {
+	height: 50px;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+}
+
+footer p {
+	text-align: right;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+
+header {
+	height: 50px;
+}
