@@ -4,7 +4,7 @@
 }
 
 .global {
-	height: 1150px;
+	height: 1180px;
 	position: relative;
 }
 
@@ -14,7 +14,7 @@ header {
 
 .mainArea {
 	position: absolute;
-	height: 1000px;
+	height: 1020px;
 	width: 400px;
 	top: 50px;
 	left: 400px;
@@ -111,6 +111,15 @@ header {
 	cursor: pointer;
 	background: #e5f6ff;
 	color: black
+}
+
+.validation {
+	height: 200px;
+	width: 300px;
+	margin-left: 50px;
+	font-size: 20px;
+	color: red;
+	display: inline-block;
 }
 
 footer {
