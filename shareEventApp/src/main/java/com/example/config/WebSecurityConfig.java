@@ -19,9 +19,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 				.authorizeRequests()
-				.antMatchers("/login", "/login-error", "/signup").permitAll()
-				.antMatchers("/calender/event_form", "/calender/event_details_edit/**",
-						"/calender/event_details_delete/**")
+				.antMatchers("/login", "/login_error", "/signup").permitAll()
+				.antMatchers("/calendar/eventForm", "/calendar/eventDetailsEdit/**",
+						"/calendar/eventDetailsDelete/**")
 				.hasRole("USER");
 
 		http.formLogin()
