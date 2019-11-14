@@ -37,6 +37,7 @@
 			</form>
 		</div>
 		<div class="validation">
+			<p th:text="${message}"/>
 			<p th:if="${loginError}">
 				<span>名前かパスワードが間違っています</span>
 			</p>
