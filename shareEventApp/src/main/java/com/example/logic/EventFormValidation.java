@@ -11,7 +11,7 @@ public class EventFormValidation {
 
 		String startHour = calenderEvent.getStartTime().substring(0,2);
 
-		String startMinutes = calenderEvent.getEndTime().substring(3);
+		String startMinutes = calenderEvent.getStartTime().substring(3);
 
 		int startTime = Integer.parseInt(startHour + startMinutes);
 

@@ -48,6 +48,27 @@
 				th:value="${_csrf.token}" /> <input class = "button" type="submit" value="編集">
 	</form>
 	</div>
+
+	<div class="validation">
+	<p th:text="${error}" />
+			<p th:text="${next}" />
+			<div th:object="${eventDetails}">
+				<p th:each="error : ${#fields.detailedErrors('eventDay')}"
+					th:text="|日付:${error.message}|" />
+				<p th:each="error : ${#fields.detailedErrors('startTime')}"
+					th:text="|開始時間:${error.message}|" />
+				<p th:each="error : ${#fields.detailedErrors('endTime')}"
+					th:text="|終了時間:${error.message}|" />
+				<p th:each="error : ${#fields.detailedErrors('title')}"
+					th:text="|タイトル:${error.message}|" />
+				<p th:each="error : ${#fields.detailedErrors('content')}"
+					th:text="|内容:${error.message}|" />
+				<p th:each="error : ${#fields.detailedErrors('place')}"
+					th:text="|住所:${error.message}|" />
+			</div>
+		</div>
+
+
 <footer><p>&copy; Tokuyama 2019</p></footer>
 </div>
 </body>

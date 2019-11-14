@@ -67,13 +67,13 @@ public class CalendarEventController {
 
 		EventFormValidation efValidate = new EventFormValidation();
 
-		if(efValidate.timeValidate(calendarEvent)) {
-			model.addAttribute("error","正しい時間を入力してください");
+		if (efValidate.timeValidate(calendarEvent)) {
+			model.addAttribute("error", "正しい時間を入力してください");
 			return "calendar/eventForm";
 		}
 
-		if(efValidate.dayValidate(calendarEvent)) {
-			model.addAttribute("next","次の日以降を入力して下さい");
+		if (efValidate.dayValidate(calendarEvent)) {
+			model.addAttribute("next", "次の日以降を入力して下さい");
 			return "calendar/eventForm";
 		}
 
@@ -89,9 +89,10 @@ public class CalendarEventController {
 
 		CalendarLogic calendarLogic = new CalendarLogic();
 		//viewに表示するカレンダーの選択年月
-		model.addAttribute("selectedcalendar", calendarLogic.selectedCalender(httpMethod, request.getParameter("selectedYear"), request.getParameter("selectedMonth")));
-		model.addAttribute("selectYear",calendarLogic.selectYear());
-		model.addAttribute("selectMonth",calendarLogic.selectMonth());
+		model.addAttribute("selectedcalendar", calendarLogic.selectedCalender(httpMethod,
+				request.getParameter("selectedYear"), request.getParameter("selectedMonth")));
+		model.addAttribute("selectYear", calendarLogic.selectYear());
+		model.addAttribute("selectMonth", calendarLogic.selectMonth());
 
 		int currentYear = calendarLogic.selectedYear(httpMethod, request.getParameter("selectedYear"));
 		int currentMonth = calendarLogic.selectedMonth(httpMethod, request.getParameter("selectedMonth"));
@@ -111,8 +112,9 @@ public class CalendarEventController {
 			calendarEvents.setLists(new ArrayList<CalendarEvent>());
 		}
 		//2.3.4週
-		for (int day = 1 ; day <= totalDays; day++) {
-				calendarEvents.setLists(calendarEventMapper.findTitle(calendarLogic.selectedDays(currentYear, currentMonth, day)));
+		for (int day = 1; day <= totalDays; day++) {
+			calendarEvents.setLists(
+					calendarEventMapper.findTitle(calendarLogic.selectedDays(currentYear, currentMonth, day)));
 		}
 		//最後の週
 		for (int i = 0; i + weekIndex + totalDays <= 42; i++) {
@@ -142,13 +144,13 @@ public class CalendarEventController {
 			}
 		}
 
-			List<ParticipateEvent> participateList = participateEventMapper.participateList(id);
+		List<ParticipateEvent> participateList = participateEventMapper.participateList(id);
 
-			mav.addObject("participateList", participateList);
-			mav.addObject("map", "http://maps.google.co.jp/maps?&output=embed&q=" + eventDetails.get().getPlace());
-			mav.addObject("eventDetails", eventDetails.get());
+		mav.addObject("participateList", participateList);
+		mav.addObject("map", "http://maps.google.co.jp/maps?&output=embed&q=" + eventDetails.get().getPlace());
+		mav.addObject("eventDetails", eventDetails.get());
 
-			return mav;
+		return mav;
 	}
 
 	@GetMapping("/calendar/eventDetailsEdit/{id}")
@@ -163,8 +165,25 @@ public class CalendarEventController {
 
 	@PostMapping("/calendar/eventDetailsEdit")
 	@Transactional(readOnly = false)
-	public ModelAndView eventDetailsEdit(@ModelAttribute("eventDetails") CalendarEvent calendarEvent,
-			ModelAndView mav) {
+	public ModelAndView eventDetailsEdit(@ModelAttribute("eventDetails") @Validated CalendarEvent calendarEvent,
+			BindingResult result, @ModelAttribute("id") int id, ModelAndView mav) {
+
+		if (result.hasErrors()) {
+			mav.setViewName("calendar/eventDetailsEdit");
+			return mav;
+		}
+
+		EventFormValidation efValidate = new EventFormValidation();
+
+		if (efValidate.timeValidate(calendarEvent)) {
+			mav.addObject("error", "正しい時間を入力してください");
+			return mav;
+		}
+
+		if (efValidate.dayValidate(calendarEvent)) {
+			mav.addObject("next", "次の日以降を入力して下さい");
+			return mav;
+		}
 
 		calendarEventMapper.update(calendarEvent);
 
