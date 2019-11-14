@@ -5,6 +5,8 @@ import java.security.Principal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,22 +48,21 @@ public class AuthController {
 	}
 
 	@GetMapping("/signup")
-	public String signup(Model model) {
+	public String signup(Model model,@ModelAttribute("formModel")Account account) {
 
 		return "signup";
 	}
 
 	@PostMapping("/signup")
-	public String loginForm(Model model, @ModelAttribute("username") String username,
-			@ModelAttribute("password") String password) throws Exception {
+	public String loginForm(Model model,@ModelAttribute("formModel")@Validated Account account,BindingResult result){
 
-		Account account = new Account();
+		if (result.hasErrors()) {
+			return "signup";
+		}
+		account.setUsername(account.getUsername());
+		account.setPassword(account.getPassword());
 
-		account.setUsername(username);
-		account.setPassword(password);
+		return resisterUserService.registerUser(account,model);
 
-		model.addAttribute("message", resisterUserService.registerUser(account));
-		return "login";
 	}
-
 }
