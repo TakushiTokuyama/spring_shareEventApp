@@ -1,48 +1,46 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8" />
-<style>
-body { color: #588098;
-background-color: #e5f6ff;
-}
-
-.contents{
-	height:500px;
-	width:500px;
-	margin:auto;
-}
-
-</style>
-<title>signup</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="/css/signup.css">
+<title>登録</title>
 </head>
 <body>
-<div class="contents">
-	<h1>ユーザー登録画面</h1>
-
-	<form th:action="@{/signup}" method="post">
-		<p>
-			<label for="username">Username</label>: <input type="text"
-				id="username" name="username" />
-		</p>
-		<p>
-			<label for="password">Password</label>: <input type="password"
-				id="password" name="password" />
-		</p>
-		<input type="hidden" th:name="${_csrf.parameterName}"
-			th:value="${_csrf.token}" />
-		<p>
-			<input type="submit" value="登録" />
-		</p>
-	</form>
-
-     <p>
-		<a href="/login">ログイン</a>
-	</p>
-	<p>
-		<a href="/">Index</a>
-	</p>
-
+	<div class="global">
+		<header></header>
+		<div class="sideMenu">
+			<ul>
+				<li><a href="/">Index</a></li>
+				<li><a href="/calendar/event">カレンダー</a></li>
+				<li><a href="/login">ログイン</a></li>
+			</ul>
+		</div>
+		<div class="mainArea"></div>
+		<div class="mainContents">
+			<h1>ユーザー登録</h1>
+			<p/>
+			<form th:action="@{/signup}" method="post">
+				<p>
+					<label for="username">Username</label>: <input type="text"
+						class="formArea" id="username" name="username" />
+				</p>
+				<p>
+					<label for="password">Password </label>: <input type="password"
+						class="formArea" id="password" name="password" />
+				</p>
+				<input type="hidden" th:name="${_csrf.parameterName}"
+					th:value="${_csrf.token}" />
+				<p>
+					<input class="button" type="submit" value="登録" />
+				</p>
+			</form>
+		</div>
+		<div class="validation">
+			<p th:text="${message}" />
+		</div>
+		<footer>
+			<p>&copy; Tokuyama 2019</p>
+		</footer>
 	</div>
 </body>
 </html>
