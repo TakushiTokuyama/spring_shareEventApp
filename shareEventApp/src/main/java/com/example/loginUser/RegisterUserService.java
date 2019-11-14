@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 import com.example.mapper.UserMapper;
 
@@ -18,28 +19,20 @@ public class RegisterUserService {
 	PasswordEncoder passwordEncoder;
 
 	@Transactional
-	public String registerUser(Account account) throws Exception {
-
-		try {
-
+	public String registerUser(Account account,Model model) {
 			Account ac = userMapper.findUser(account);
 
 			if (ac != null) {
-
-				return "既にUsernameが登録されています";
+				model.addAttribute("message","既にUsernameが登録されています");
+				return "signup";
 			}
 
 			account.setPassword(passwordEncoder.encode(account.getPassword()));
 
 			userMapper.saveUser(account);
 
-			return "登録できました";
+			model.addAttribute("message","登録できました");
 
-		} catch (Exception ex) {
-
-			System.out.println(ex);
-
-		}
-		return "DBError";
+			return "login";
 	}
 }
