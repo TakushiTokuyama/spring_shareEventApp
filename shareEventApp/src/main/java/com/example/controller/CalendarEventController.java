@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -210,5 +211,17 @@ public class CalendarEventController {
 
 		return new ModelAndView("redirect:/calendar/event");
 	}
+
+	@GetMapping("/calendar/eventSoonSearch")
+	@Transactional(readOnly = false)
+	public ModelAndView eventSoonSearch(ModelAndView mav) {
+		mav.setViewName("calendar/eventSoonSearch");
+
+		mav.addObject("eventSoonList",calendarEventMapper.soonSearch(LocalDate.now()));
+		mav.addObject("today",LocalDate.now());
+
+		return mav;
+	}
+
 
 }

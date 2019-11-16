@@ -42,4 +42,9 @@
 		delete from events where id = #{id}
 	</select>
 
+	<select id="soonSearch"
+		resultType="com.example.domain.CalendarEvent">
+		select * from events where eventDay >= #{today} order by eventDay asc limit 6;
+	</select>
+
 </mapper>

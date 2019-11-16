@@ -1,5 +1,6 @@
 package com.example.mapper;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,5 +25,7 @@ public interface CalendarEventMapper {
 	void update(CalendarEvent calendarEvent);
 
 	void delete(int id);
+
+	List<CalendarEvent> soonSearch(LocalDate today);
 
 }

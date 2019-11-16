@@ -1,0 +1,104 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+.global {
+	height: 770px;
+	position: relative;
+}
+
+header {
+	height: 50px;
+}
+
+.eventSoonTitle {
+	position: relative;
+	height: 40px;
+	width: 700px;
+	left: 250px;
+	border-bottom: solid 2px #ccc;
+}
+
+.eventSoonTitle h1 {
+	font-size: 28px;
+	font-family: arial, sans-serif;
+}
+
+.eventDetails {
+	position: relative;
+	height: 80px;
+	width: 700px;
+	left: 250px;
+	border-bottom: solid 2px #ccc;
+	padding: 10px 0px;
+	font-weight: bold;
+}
+
+.eventDetailsLeft {
+	position: absolute;
+	text-align: center;
+}
+
+.eventDetailsLeft p {
+	margin: 0px 0px;
+	font-size: 19px;
+	font-family: arial, sans-serif;
+}
+
+.eventDetailsLeft span {
+	
+}
+
+.heldToday {
+	background-color: red;
+	width: 20px;
+	height: 20px;
+	padding: 5px;
+	border-radius: 3px;
+	font-size: 15px;
+}
+
+.eventDetailsRight {
+	position: absolute;
+	left: 250px;
+}
+
+.eventDetailsRight p {
+	margin: 0px 0px;
+	font-size: 19px;
+	font-family: arial, sans-serif;
+}
+
+.sideMenu {
+	width: 150px;
+	height: 100px;
+	float: right;
+	margin-right: 50px;
+}
+
+.sideMenu li {
+	width: 100%;
+	padding: 20px;
+	font-size: 20px;
+	font-family: 'Ubuntu', sans-serif;
+	border-left: 3px solid #474655;
+	border-top: 1px solid #474655;
+	border-right: 1px solid #474655;
+	border-bottom: 1px solid #474655;
+	background-color: #fff;
+	list-style: none;
+}
+
+footer {
+	height: 50px;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+}
+
+footer p {
+	text-align: right;
+	margin-top: 10px;
+	margin-right: 10px;
+}
