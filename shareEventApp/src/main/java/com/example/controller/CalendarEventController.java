@@ -148,7 +148,7 @@ public class CalendarEventController {
 		List<ParticipateEvent> participateList = participateEventMapper.participateList(id);
 
 		mav.addObject("participateList", participateList);
-		mav.addObject("map", "http://maps.google.co.jp/maps?&output=embed&q=" + eventDetails.get().getPlace());
+		mav.addObject("map", "https://maps.google.co.jp/maps?&output=embed&q=" + eventDetails.get().getPlace());
 		mav.addObject("eventDetails", eventDetails.get());
 
 		return mav;
