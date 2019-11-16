@@ -18,7 +18,7 @@
 		<div class="eventSoonTitle">
 			<h1>もうすぐ開催</h1>
 		</div>
-		<div th:if="${eventSoonList.size() == 1}">
+		<div th:if="${eventSoonList.size() >= 1}">
 			<div class="eventDetails">
 
 				<div class="eventDetailsLeft">
@@ -32,18 +32,19 @@
 						<span class="heldToday">本日開催</span>
 					</p>
 				</div>
-			</div>
-			<div class="eventDetailsRight">
-				<p>
-					<a
-						th:href="@{'/calendar/eventDetails/' + ${eventSoonList.get(0).id}}"><span
-						th:text="|タイトル:${eventSoonList.get(0).title}|"></span></a>
-				</p>
-				<p th:text="|主催者:${eventSoonList.get(0).name}|" />
-				<p th:text="|場所:${eventSoonList.get(0).place}|" />
+
+				<div class="eventDetailsRight">
+					<p>
+						<a
+							th:href="@{'/calendar/eventDetails/' + ${eventSoonList.get(0).id}}"><span
+							th:text="|タイトル:${eventSoonList.get(0).title}|"></span></a>
+					</p>
+					<p th:text="|主催者:${eventSoonList.get(0).name}|" />
+					<p th:text="|場所:${eventSoonList.get(0).place}|" />
+				</div>
 			</div>
 		</div>
-		<div th:if="${eventSoonList.size() == 2}">
+		<div th:if="${eventSoonList.size() >= 2}">
 			<div class="eventDetails">
 
 				<div class="eventDetailsLeft">
@@ -70,7 +71,7 @@
 
 			</div>
 		</div>
-		<div th:if="${eventSoonList.size() == 3}">
+		<div th:if="${eventSoonList.size() >= 3}">
 			<div class="eventDetails">
 
 				<div class="eventDetailsLeft">
@@ -97,7 +98,7 @@
 
 			</div>
 		</div>
-		<div th:if="${eventSoonList.size() == 4}">
+		<div th:if="${eventSoonList.size() >= 4}">
 			<div class="eventDetails">
 
 				<div class="eventDetailsLeft">
@@ -123,7 +124,7 @@
 				</div>
 			</div>
 		</div>
-		<div th:if="${eventSoonList.size() == 5}">
+		<div th:if="${eventSoonList.size() >= 5}">
 			<div class="eventDetails">
 
 				<div class="eventDetailsLeft">
@@ -150,7 +151,7 @@
 
 			</div>
 		</div>
-		<div th:if="${eventSoonList.size() == 6}">
+		<div th:if="${eventSoonList.size() >= 6}">
 			<div class="eventDetails">
 
 				<div class="eventDetailsLeft">
