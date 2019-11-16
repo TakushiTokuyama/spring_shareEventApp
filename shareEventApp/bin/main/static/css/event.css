@@ -8,7 +8,8 @@
 	position: relative;
 }
 
-.titleList {display;block;
+.titleList {
+	width:500px;
 	height: 70px;
 	position: relative;
 	left: 200px;

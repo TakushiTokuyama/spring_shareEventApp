@@ -18,20 +18,21 @@
 		<div class="eventSoonTitle">
 			<h1>もうすぐ開催</h1>
 		</div>
-		<div class="eventDetails">
+		<div th:if="${eventSoonList.size() == 1}">
+			<div class="eventDetails">
 
-			<div class="eventDetailsLeft">
-				<p>
-					<span th:text="${eventSoonList.get(0).eventDay}"></span><span
-						th:text="| (${#temporals.dayOfWeekNameShort(today)})|"></span>
-				</p>
-				<p th:text="|開始時間 ${eventSoonList.get(0).startTime}~|" />
-				<p
-					th:if="${eventSoonList.get(0).eventDay == #temporals.format(today,'yyyy-MM-dd')}">
-					<span class="heldToday">本日開催</span>
-				</p>
+				<div class="eventDetailsLeft">
+					<p>
+						<span th:text="${eventSoonList.get(0).eventDay}"></span><span
+							th:text="| (${#temporals.dayOfWeekNameShort(today)})|"></span>
+					</p>
+					<p th:text="|開始時間 ${eventSoonList.get(0).startTime}~|" />
+					<p
+						th:if="${eventSoonList.get(0).eventDay == #temporals.format(today,'yyyy-MM-dd')}">
+						<span class="heldToday">本日開催</span>
+					</p>
+				</div>
 			</div>
-
 			<div class="eventDetailsRight">
 				<p>
 					<a
@@ -41,137 +42,139 @@
 				<p th:text="|主催者:${eventSoonList.get(0).name}|" />
 				<p th:text="|場所:${eventSoonList.get(0).place}|" />
 			</div>
-
 		</div>
+		<div th:if="${eventSoonList.size() == 2}">
+			<div class="eventDetails">
 
-		<div class="eventDetails">
+				<div class="eventDetailsLeft">
+					<p>
+						<span th:text="${eventSoonList.get(1).eventDay}"></span><span
+							th:text="| (${#temporals.dayOfWeekNameShort(today)})|"></span>
+					</p>
+					<p th:text="|開始時間 ${eventSoonList.get(1).startTime}~|" />
+					<p
+						th:if="${eventSoonList.get(1).eventDay == #temporals.format(today,'yyyy-MM-dd')}">
+						<span class="heldToday">本日開催</span>
+					</p>
+				</div>
 
-			<div class="eventDetailsLeft">
-				<p>
-					<span th:text="${eventSoonList.get(1).eventDay}"></span><span
-						th:text="| (${#temporals.dayOfWeekNameShort(today)})|"></span>
-				</p>
-				<p th:text="|開始時間 ${eventSoonList.get(1).startTime}~|" />
-				<p
-					th:if="${eventSoonList.get(1).eventDay == #temporals.format(today,'yyyy-MM-dd')}">
-					<span class="heldToday">本日開催</span>
-				</p>
+				<div class="eventDetailsRight">
+					<p>
+						<a
+							th:href="@{'/calendar/eventDetails/' + ${eventSoonList.get(1).id}}"><span
+							th:text="|タイトル:${eventSoonList.get(1).title}|"></span></a>
+					</p>
+					<p th:text="|主催者:${eventSoonList.get(1).name}|" />
+					<p th:text="|場所:${eventSoonList.get(1).place}|" />
+				</div>
+
 			</div>
-
-			<div class="eventDetailsRight">
-				<p>
-					<a
-						th:href="@{'/calendar/eventDetails/' + ${eventSoonList.get(1).id}}"><span
-						th:text="|タイトル:${eventSoonList.get(1).title}|"></span></a>
-				</p>
-				<p th:text="|主催者:${eventSoonList.get(1).name}|" />
-				<p th:text="|場所:${eventSoonList.get(1).place}|" />
-			</div>
-
 		</div>
+		<div th:if="${eventSoonList.size() == 3}">
+			<div class="eventDetails">
 
-		<div class="eventDetails">
+				<div class="eventDetailsLeft">
+					<p>
+						<span th:text="${eventSoonList.get(2).eventDay}"></span><span
+							th:text="| (${#temporals.dayOfWeekNameShort(today)})|"></span>
+					</p>
+					<p th:text="|開始時間 ${eventSoonList.get(2).startTime}~|" />
+					<p
+						th:if="${eventSoonList.get(2).eventDay == #temporals.format(today,'yyyy-MM-dd')}">
+						<span class="heldToday">本日開催</span>
+					</p>
+				</div>
 
-			<div class="eventDetailsLeft">
-				<p>
-					<span th:text="${eventSoonList.get(2).eventDay}"></span><span
-						th:text="| (${#temporals.dayOfWeekNameShort(today)})|"></span>
-				</p>
-				<p th:text="|開始時間 ${eventSoonList.get(2).startTime}~|" />
-				<p
-					th:if="${eventSoonList.get(2).eventDay == #temporals.format(today,'yyyy-MM-dd')}">
-					<span class="heldToday">本日開催</span>
-				</p>
+				<div class="eventDetailsRight">
+					<p>
+						<a
+							th:href="@{'/calendar/eventDetails/' + ${eventSoonList.get(2).id}}"><span
+							th:text="|タイトル:${eventSoonList.get(2).title}|"></span></a>
+					</p>
+					<p th:text="|主催者:${eventSoonList.get(2).name}|" />
+					<p th:text="|場所:${eventSoonList.get(2).place}|" />
+				</div>
+
 			</div>
-
-			<div class="eventDetailsRight">
-				<p>
-					<a
-						th:href="@{'/calendar/eventDetails/' + ${eventSoonList.get(2).id}}"><span
-						th:text="|タイトル:${eventSoonList.get(2).title}|"></span></a>
-				</p>
-				<p th:text="|主催者:${eventSoonList.get(2).name}|" />
-				<p th:text="|場所:${eventSoonList.get(2).place}|" />
-			</div>
-
 		</div>
+		<div th:if="${eventSoonList.size() == 4}">
+			<div class="eventDetails">
 
-		<div class="eventDetails">
+				<div class="eventDetailsLeft">
+					<p>
+						<span th:text="${eventSoonList.get(3).eventDay}"></span><span
+							th:text="| (${#temporals.dayOfWeekNameShort(today)})|"></span>
+					</p>
+					<p th:text="|開始時間 ${eventSoonList.get(3).startTime}~|" />
+					<p
+						th:if="${eventSoonList.get(3).eventDay == #temporals.format(today,'yyyy-MM-dd')}">
+						<span class="heldToday">本日開催</span>
+					</p>
+				</div>
 
-			<div class="eventDetailsLeft">
-				<p>
-					<span th:text="${eventSoonList.get(3).eventDay}"></span><span
-						th:text="| (${#temporals.dayOfWeekNameShort(today)})|"></span>
-				</p>
-				<p th:text="|開始時間 ${eventSoonList.get(3).startTime}~|" />
-				<p
-					th:if="${eventSoonList.get(3).eventDay == #temporals.format(today,'yyyy-MM-dd')}">
-					<span class="heldToday">本日開催</span>
-				</p>
+				<div class="eventDetailsRight">
+					<p>
+						<a
+							th:href="@{'/calendar/eventDetails/' + ${eventSoonList.get(3).id}}"><span
+							th:text="|タイトル:${eventSoonList.get(3).title}|"></span></a>
+					</p>
+					<p th:text="|主催者:${eventSoonList.get(3).name}|" />
+					<p th:text="|場所:${eventSoonList.get(3).place}|" />
+				</div>
 			</div>
-
-			<div class="eventDetailsRight">
-				<p>
-					<a
-						th:href="@{'/calendar/eventDetails/' + ${eventSoonList.get(3).id}}"><span
-						th:text="|タイトル:${eventSoonList.get(3).title}|"></span></a>
-				</p>
-				<p th:text="|主催者:${eventSoonList.get(3).name}|" />
-				<p th:text="|場所:${eventSoonList.get(3).place}|" />
-			</div>
-
 		</div>
+		<div th:if="${eventSoonList.size() == 5}">
+			<div class="eventDetails">
 
-		<div class="eventDetails">
+				<div class="eventDetailsLeft">
+					<p>
+						<span th:text="${eventSoonList.get(4).eventDay}"></span><span
+							th:text="| (${#temporals.dayOfWeekNameShort(today)})|"></span>
+					</p>
+					<p th:text="|開始時間 ${eventSoonList.get(4).startTime}~|" />
+					<p
+						th:if="${eventSoonList.get(4).eventDay == #temporals.format(today,'yyyy-MM-dd')}">
+						<span class="heldToday">本日開催</span>
+					</p>
+				</div>
 
-			<div class="eventDetailsLeft">
-				<p>
-					<span th:text="${eventSoonList.get(4).eventDay}"></span><span
-						th:text="| (${#temporals.dayOfWeekNameShort(today)})|"></span>
-				</p>
-				<p th:text="|開始時間 ${eventSoonList.get(4).startTime}~|" />
-				<p
-					th:if="${eventSoonList.get(4).eventDay == #temporals.format(today,'yyyy-MM-dd')}">
-					<span class="heldToday">本日開催</span>
-				</p>
+				<div class="eventDetailsRight">
+					<p>
+						<a
+							th:href="@{'/calendar/eventDetails/' + ${eventSoonList.get(4).id}}"><span
+							th:text="|タイトル:${eventSoonList.get(4).title}|"></span></a>
+					</p>
+					<p th:text="|主催者:${eventSoonList.get(4).name}|" />
+					<p th:text="|場所:${eventSoonList.get(4).place}|" />
+				</div>
+
 			</div>
-
-			<div class="eventDetailsRight">
-				<p>
-					<a
-						th:href="@{'/calendar/eventDetails/' + ${eventSoonList.get(4).id}}"><span
-						th:text="|タイトル:${eventSoonList.get(4).title}|"></span></a>
-				</p>
-				<p th:text="|主催者:${eventSoonList.get(4).name}|" />
-				<p th:text="|場所:${eventSoonList.get(4).place}|" />
-			</div>
-
 		</div>
+		<div th:if="${eventSoonList.size() == 6}">
+			<div class="eventDetails">
 
-		<div class="eventDetails">
+				<div class="eventDetailsLeft">
+					<p>
+						<span th:text="${eventSoonList.get(5).eventDay}"></span><span
+							th:text="| (${#temporals.dayOfWeekNameShort(today)})|"></span>
+					</p>
+					<p th:text="|開始時間 ${eventSoonList.get(5).startTime}~|" />
+					<p
+						th:if="${eventSoonList.get(5).eventDay == #temporals.format(today,'yyyy-MM-dd')}">
+						<span class="heldToday">本日開催</span>
+					</p>
+				</div>
 
-			<div class="eventDetailsLeft">
-				<p>
-					<span th:text="${eventSoonList.get(5).eventDay}"></span><span
-						th:text="| (${#temporals.dayOfWeekNameShort(today)})|"></span>
-				</p>
-				<p th:text="|開始時間 ${eventSoonList.get(5).startTime}~|" />
-				<p
-					th:if="${eventSoonList.get(5).eventDay == #temporals.format(today,'yyyy-MM-dd')}">
-					<span class="heldToday">本日開催</span>
-				</p>
+				<div class="eventDetailsRight">
+					<p>
+						<a
+							th:href="@{'/calendar/eventDetails/' + ${eventSoonList.get(5).id}}"><span
+							th:text="|タイトル:${eventSoonList.get(5).title}|"></span></a>
+					</p>
+					<p th:text="|主催者:${eventSoonList.get(5).name}|" />
+					<p th:text="|場所:${eventSoonList.get(5).place}|" />
+				</div>
 			</div>
-
-			<div class="eventDetailsRight">
-				<p>
-					<a
-						th:href="@{'/calendar/eventDetails/' + ${eventSoonList.get(5).id}}"><span
-						th:text="|タイトル:${eventSoonList.get(5).title}|"></span></a>
-				</p>
-				<p th:text="|主催者:${eventSoonList.get(5).name}|" />
-				<p th:text="|場所:${eventSoonList.get(5).place}|" />
-			</div>
-
 		</div>
 		<footer>
 			<p>&copy; Tokuyama 2019</p>
