@@ -47,7 +47,7 @@ public class ParticipateController {
 
 		mav.addObject("participateList", participateEventMapper.participateList(id));
 		mav.addObject("eventDetails", eventDetails.get());
-		mav.addObject("map", "http://maps.google.co.jp/maps?&output=embed&q=" + eventDetails.get().getPlace());
+		mav.addObject("map", "https://maps.google.co.jp/maps?&output=embed&q=" + eventDetails.get().getPlace());
 
 		return mav;
 	}
@@ -74,7 +74,7 @@ public class ParticipateController {
 
 		mav.addObject("participateList", participateEventMapper.participateList(id));
 		mav.addObject("eventDetails", eventDetails.get());
-		mav.addObject("map", "http://maps.google.co.jp/maps?&output=embed&q=" + eventDetails.get().getPlace());
+		mav.addObject("map", "https://maps.google.co.jp/maps?&output=embed&q=" + eventDetails.get().getPlace());
 
 		return mav;
 	}
