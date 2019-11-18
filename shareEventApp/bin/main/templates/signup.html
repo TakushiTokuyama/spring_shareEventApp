@@ -3,6 +3,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css" href="/css/signup.css">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link href="/css/signup.css" rel="stylesheet" type="text/css"
+	media="(min-width: 320px) and (max-width: 639px)">
 <title>登録</title>
 </head>
 <body>
@@ -15,7 +19,6 @@
 				<li><a href="/login">ログイン</a></li>
 			</ul>
 		</div>
-		<div class="mainArea"></div>
 		<div class="mainContents">
 			<h1>ユーザー登録</h1>
 			<p />
@@ -35,16 +38,16 @@
 				<p>
 					<input class="button" type="submit" value="登録" />
 				</p>
+				<div class="validation">
+					<p th:text="${message}" />
+					<div th:object="${formModel}">
+						<p th:each="error : ${#fields.detailedErrors('username')}"
+							th:text="${error.message}" />
+						<p th:each="error : ${#fields.detailedErrors('password')}"
+							th:text="${error.message}" />
+					</div>
+				</div>
 			</form>
-		</div>
-		<div class="validation">
-			<p th:text="${message}" />
-			<div th:object="${formModel}">
-				<p th:each="error : ${#fields.detailedErrors('username')}"
-					th:text="${error.message}" />
-				<p th:each="error : ${#fields.detailedErrors('password')}"
-					th:text="${error.message}" />
-			</div>
 		</div>
 		<footer>
 			<p>&copy; Tokuyama 2019</p>

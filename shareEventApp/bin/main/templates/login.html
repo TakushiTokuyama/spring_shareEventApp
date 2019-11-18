@@ -3,6 +3,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css" href="/css/login.css">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link href="/css/login.css" rel="stylesheet" type="text/css"
+	media="(min-width: 320px) and (max-width: 639px)">
 <title>ログイン</title>
 </head>
 <body>
@@ -15,11 +19,12 @@
 				<li><a href="/signup">登録</a></li>
 			</ul>
 		</div>
-		<div class="mainArea"></div>
 		<div class="mainContents">
 			<h1>ログイン</h1>
-			<p/>
+			<p />
 			<form th:action="@{/login}" method="post">
+
+
 				<p>
 					<label for="username">Username</label>: <input type="text"
 						class="formArea" id="username" name="username"
@@ -34,13 +39,8 @@
 				<p>
 					<input class="button" type="submit" value="ログイン" />
 				</p>
+				<span class="validation" th:text="${loginError}"></span>
 			</form>
-		</div>
-		<div class="validation">
-			<p th:text="${message}"/>
-			<p th:if="${loginError}">
-				<span>名前かパスワードが間違っています</span>
-			</p>
 		</div>
 		<footer>
 			<p>&copy; Tokuyama 2019</p>
