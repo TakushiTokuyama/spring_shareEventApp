@@ -43,7 +43,7 @@ public class AuthController {
 	@RequestMapping("/login_error")
 	public String login_error(Model model) {
 
-		model.addAttribute("loginError", true);
+		model.addAttribute("loginError", "名前かパスワードが間違っています");
 		return "login";
 	}
 

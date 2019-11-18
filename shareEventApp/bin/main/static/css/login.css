@@ -3,33 +3,28 @@
 	padding: 0px;
 }
 
-.global {
-	height: 750px;
-	position: relative;
-}
-
 header {
 	height: 50px;
 }
 
-.mainArea {
-	position: absolute;
-	height: 300px;
-	width: 400px;
-	top: 50px;
-	left: 400px;
-	z-index: 10;
+header h1 {
+	font-family: arial, sans-serif;
+	font-size: 25px;
+	padding: 10px;
+}
+
+.global {
+	height: 750px;
+	width: 100%;
+}
+
+.mainContents {
 	border: solid 2px #ccc;
 	padding: 25px;
 	background-color: #e5f6ff;
 	border-radius: 3px;
-}
-
-.mainContents {
-	position: absolute;
-	top: 70px;
-	left: 470px;
-	z-index: 15;
+	margin: auto;
+	width: 400px;
 }
 
 .mainContents h1 {
@@ -37,6 +32,12 @@ header {
 	padding: 15px 0px 5px 0px;
 	font-size: 25px;
 	border-bottom: 1px solid #383232;
+}
+
+.mainContents h2 {
+	font-family: arial, sans-serif;
+	padding: 25px 0px 5px 0px;
+	font-size: 25px;
 }
 
 .mainContents p {
@@ -104,10 +105,109 @@ footer p {
 }
 
 .validation {
-	height: 200px;
-	width: 350px;
-	margin-left: 50px;
 	font-size: 20px;
 	color: red;
 	display: inline-block;
+}
+
+@media screen and (max-width:639px) {
+	* {
+		margin: 0px;
+		padding: 0px;
+	}
+	header {
+		height: 50px;
+	}
+	header h1 {
+		font-family: arial, sans-serif;
+		font-size: 15px;
+		padding: 10px;
+	}
+	.global {
+		height: 750px;
+		width: 100%;
+	}
+	.mainContents {
+		border: solid 2px #ccc;
+		padding: 15px;
+		background-color: #e5f6ff;
+		border-radius: 3px;
+		margin: auto;
+		width: 250px;
+	}
+	.mainContents h1 {
+		font-family: arial, sans-serif;
+		padding: 5px 0px 5px 0px;
+		font-size: 15px;
+		border-bottom: 1px solid #383232;
+	}
+	.mainContents h2 {
+		font-family: arial, sans-serif;
+		padding: 5px 0px 5px 0px;
+		font-size: 15px;
+	}
+	.mainContents p {
+		font-family: arial, sans-serif;
+		padding: 5px 0px 5px 0px;
+		font-size: 10px;
+	}
+	.formArea {
+		padding: 3px;
+		font-size: 10px;
+		font-family: Arial, sans-serif;
+		color: #aaa;
+		border: solid 1px #ccc;
+		margin-bottom: 5px;
+		width: 100px;
+		border-radius: 3px;
+	}
+	.sideMenu {
+		width: 40px;
+		height: 100px;
+		float: right;
+		margin-right: 10px;
+	}
+	.sideMenu li {
+		padding: 5px;
+		font-size: 10px;
+		font-family: 'Ubuntu', sans-serif;
+		border-left: 3px solid #474655;
+		border-top: 1px solid #474655;
+		border-right: 1px solid #474655;
+		border-bottom: 1px solid #474655;
+		background-color: #fff;
+		list-style: none;
+	}
+	.button {
+		display: inline-block;
+		border-radius: 3px;
+		font-size: 8pt;
+		width: 50px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		text-align: center;
+		border: solid 2px #ccc;
+		cursor: pointer;
+		background: #e5f6ff;
+		color: black
+	}
+	footer {
+		height: 50px;
+		width: 100%;
+		position: absolute;
+		bottom: 0;
+	}
+	footer p {
+		text-align: right;
+		margin-top: 10px;
+		margin-right: 10px;
+	}
+	.validation {
+		font-size: 10px;
+		color: red;
+		display: inline-block;
+	}
+	.validation p {
+		padding: 0px 0px;
+	}
 }
