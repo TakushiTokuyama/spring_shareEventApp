@@ -4,72 +4,86 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>編集</title>
 <link rel="stylesheet" type="text/css" href="/css/eventDetailsEdit.css">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link href="/css/eventDetailsEdit.css" rel="stylesheet" type="text/css"
+	media="(min-width: 320px) and (max-width: 639px)">
 </head>
 <body>
-<div class = "global">
-<header></header>
+	<div class="global">
+		<header></header>
 
-	<div class="sideMenu">
-		<ul>
-			<li><a href="/">Index</a></li>
-			<li><a href="/calendar/event">カレンダー</a></li>
-		</ul>
-	</div>
-
-<div class = "mainArea"></div>
-	<div class = "mainContents">
-	<form action="/calendar/eventDetailsEdit" method="post"
-		th:object="${eventDetails}">
-
-					<h1>日付</h1>
-					<p><input class="formTimeArea" type="date" min="2019-10-01" max="2030-12-31"
-						name="eventDay" th:field="*{eventDay}"></p>
-
-					<h1>開始時間</h1>
-					<p><input class="formTimeArea" type="time" name="startTime"
-						th:field="*{startTime}"></p>
-
-					<h1>終了時間</h1>
-					<p><input class="formTimeArea" type="time" name="endTime" th:field="*{endTime}"></p>
-
-					<h1>タイトル</h1>
-					<p><input class="formArea" type="text" name="title" th:field="*{title}"></p>
-
-					<h1>内容</h1>
-					<p><textarea class="formTextArea" name="content" th:field="*{content}"></textarea></p>
-
-					<h1>場所</h1>
-					<p><input class="formArea" type="text" name="place" th:field="*{place}"></p>
-
-					<input type="hidden" name="name" th:field="*{name}">
-					<input type="hidden" name="id" th:field="*{id}">
-
-			<input type="hidden" th:name="${_csrf.parameterName}"
-				th:value="${_csrf.token}" /> <input class = "button" type="submit" value="編集">
-	</form>
-	</div>
-
-	<div class="validation">
-	<p th:text="${error}" />
-			<p th:text="${next}" />
-			<div th:object="${eventDetails}">
-				<p th:each="error : ${#fields.detailedErrors('eventDay')}"
-					th:text="|日付:${error.message}|" />
-				<p th:each="error : ${#fields.detailedErrors('startTime')}"
-					th:text="|開始時間:${error.message}|" />
-				<p th:each="error : ${#fields.detailedErrors('endTime')}"
-					th:text="|終了時間:${error.message}|" />
-				<p th:each="error : ${#fields.detailedErrors('title')}"
-					th:text="|タイトル:${error.message}|" />
-				<p th:each="error : ${#fields.detailedErrors('content')}"
-					th:text="|内容:${error.message}|" />
-				<p th:each="error : ${#fields.detailedErrors('place')}"
-					th:text="|住所:${error.message}|" />
-			</div>
+		<div class="sideMenu">
+			<ul>
+				<li><a href="/">Index</a></li>
+				<li><a href="/calendar/event">カレンダー</a></li>
+			</ul>
 		</div>
 
+		<div class="mainContents">
+			<form action="/calendar/eventDetailsEdit" method="post"
+				th:object="${eventDetails}">
 
-<footer><p>&copy; Tokuyama 2019</p></footer>
-</div>
+				<h1>日付</h1>
+				<p class="validation" th:text="${next}" />
+				<div class="validation" th:if="${#fields.hasErrors('eventDay')}"
+					th:errors="*{eventDay}"></div>
+				<p>
+					<input class="formTimeArea" type="date" min="2019-10-01"
+						max="2030-12-31" name="eventDay" th:field="*{eventDay}">
+				</p>
+
+				<h1>開始時間</h1>
+				<p class="validation" th:text="${error}" />
+				<div class="validation" th:if="${#fields.hasErrors('startTime')}"
+					th:errors="*{startTime}"></div>
+				<p>
+					<input class="formTimeArea" type="time" name="startTime"
+						th:field="*{startTime}">
+				</p>
+
+				<h1>終了時間</h1>
+				<div class="validation" th:if="${#fields.hasErrors('endTime')}"
+					th:errors="*{endTime}"></div>
+				<p>
+					<input class="formTimeArea" type="time" name="endTime"
+						th:field="*{endTime}">
+				</p>
+
+				<h1>タイトル</h1>
+				<div class="validation" th:if="${#fields.hasErrors('title')}"
+					th:errors="*{title}"></div>
+				<p>
+					<input class="formArea" type="text" name="title"
+						th:field="*{title}">
+				</p>
+
+				<h1>内容</h1>
+				<div class="validation" th:if="${#fields.hasErrors('content')}"
+					th:errors="*{content}"></div>
+				<p>
+					<textarea class="formTextArea" name="content" th:field="*{content}"></textarea>
+				</p>
+
+				<h1>場所</h1>
+				<div class="validation" th:if="${#fields.hasErrors('place')}"
+					th:errors="*{place}"></div>
+				<p>
+					<input class="formArea" type="text" name="place"
+						th:field="*{place}">
+				</p>
+
+				<input type="hidden" name="name" th:field="*{name}"> <input
+					type="hidden" name="id" th:field="*{id}"> <input
+					type="hidden" th:name="${_csrf.parameterName}"
+					th:value="${_csrf.token}" /> <input class="button" type="submit"
+					value="編集">
+			</form>
+		</div>
+
+		<footer>
+			<p>&copy; Tokuyama 2019</p>
+		</footer>
+	</div>
 </body>
 </html>
