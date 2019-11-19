@@ -7,24 +7,17 @@ header {
 	position: relative;
 }
 
-.mainArea {
+.mainContents {
 	position: absolute;
 	height: 800px;
 	width: 400px;
 	top: 50px;
-	left: 400px;
-	z-index: 10;
+	left: 390px;
+	z-index: 15;
 	border: solid 2px #ccc;
 	padding: 25px;
 	background-color: #e5f6ff;
 	border-radius: 3px;
-}
-
-.mainContents {
-	position: absolute;
-	top: 50px;
-	left: 420px;
-	z-index: 15;
 }
 
 .mainContents h1 {
@@ -46,9 +39,15 @@ header {
 
 .mapContents {
 	position: absolute;
+	height: 650px;
+	width: 430px;
 	top: 200px;
-	left: 900px;
+	left: 870px;
 	z-index: 20;
+	border: solid 2px #ccc;
+	padding: 25px;
+	background-color: #e5f6ff;
+	border-radius: 3px;
 }
 
 .mapContents h1 {
@@ -62,19 +61,6 @@ header {
 	font-family: arial, sans-serif;
 	padding: 15px 0px 10px 0px;
 	font-size: 20px;
-}
-
-.mapArea {
-	position: absolute;
-	height: 650px;
-	width: 430px;
-	top: 200px;
-	left: 890px;
-	z-index: 10;
-	border: solid 2px #ccc;
-	padding: 25px;
-	background-color: #e5f6ff;
-	border-radius: 3px;
 }
 
 .participateList {
@@ -105,7 +91,9 @@ header {
 .sideMenu {
 	width: 150px;
 	height: 100px;
-	float: right;
+	position: absolute;
+	left: 1160px;
+	top: 50px;
 	margin-right: 50px;
 }
 
@@ -125,7 +113,7 @@ header {
 .link {
 	position: absolute;
 	left: 920px;
-	top: 100px;
+	top: 80px;
 }
 
 .link li {
@@ -138,7 +126,6 @@ header {
 	text-align: center;
 	border: solid 2px #ccc;
 	margin-right: 20px;
-	float: right;
 	background: #e5f6ff;
 }
 
@@ -155,4 +142,159 @@ footer p {
 	text-align: right;
 	margin-top: 10px;
 	margin-right: 10px;
+}
+
+@media
+screen
+and
+(max-width:639px)
+{
+header {
+	height: 50px;
+}
+
+.global {
+	height: 880px;
+	position: relative;
+	width: 100%;
+}
+
+.mainContents {
+	position: absolute;
+	height: 800px;
+	width: 200px;
+	top: 50px;
+	left: 210px;
+	z-index: 15;
+	border: solid 2px #ccc;
+	padding: 10px;
+	background-color: #e5f6ff;
+	border-radius: 3px;
+}
+
+.mainContents h1 {
+	font-family: arial, sans-serif;
+	padding: 10px 0px 5px 0px;
+	font-size: 25px;
+	border-bottom: 1px solid #383232;
+}
+
+.mainContents p {
+	font-family: arial, sans-serif;
+	padding: 10px 0px 10px 0px;
+	font-size: 20px;
+}
+
+.details {
+	width: 200px;
+}
+
+.mapContents {
+	position: absolute;
+	height: 650px;
+	width: 430px;
+	top: 200px;
+	left: 450px;
+	z-index: 20;
+	border: solid 2px #ccc;
+	padding: 10px;
+	background-color: #e5f6ff;
+	border-radius: 3px;
+}
+
+.mapContents h1 {
+	font-family: arial, sans-serif;
+	padding: 10px 0px 5px 0px;
+	font-size: 25px;
+	border-bottom: 1px solid #383232;
+}
+
+.mapContents p {
+	font-family: arial, sans-serif;
+	padding: 10px 0px 10px 0px;
+	font-size: 20px;
+}
+
+.participateList {
+	padding: 8px 20px;
+	color: #2c2c2f;
+	background: #e5f6ff;
+	border: solid 2px #ccc;
+	width: 150px;
+	text-align: center;
+}
+
+.participateList h1 {
+	font-family: arial, sans-serif;
+	font-size: 20px;
+}
+
+.participateList li {
+	font-family: arial, sans-serif;
+	font-size: 15px;
+	list-style: none;
+}
+
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+.sideMenu {
+	width: 80px;
+	height: 120px;
+	margin-right: 10px;
+	position: absolute;
+	left: 790px;
+	top: 75px;
+}
+
+.sideMenu li {
+	padding: 14px;
+	font-size: 15px;
+	font-family: 'Ubuntu', sans-serif;
+	border-left: 3px solid #474655;
+	border-top: 1px solid #474655;
+	border-right: 1px solid #474655;
+	border-bottom: 1px solid #474655;
+	background-color: #fff;
+	list-style: none;
+}
+
+.link {
+	position: absolute;
+	left: 500px;
+	top: 70px;
+}
+
+.link li {
+	list-style: none;
+	font-size: 20px;
+	display: block;
+	width: 100px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+	border: solid 2px #ccc;
+	margin-right: 20px;
+	background: #e5f6ff;
+	float: right;
+}
+
+.link a {
+	text-decoration: none;
+}
+
+footer {
+	height: 50px;
+	width: 100%;
+	position: absolute;
+	left: 520px;
+}
+
+footer p {
+	text-align: right;
+	margin-top: 10px;
+	margin-right: 10px;
+}
 }
