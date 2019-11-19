@@ -4,7 +4,7 @@
 }
 
 .global {
-	height: 820px;
+	height: 1050px;
 	position: relative;
 }
 
@@ -12,24 +12,14 @@ header {
 	height: 50px;
 }
 
-.mainArea {
-	position: absolute;
-	height: 670px;
+.mainContents {
+	height: 850px;
 	width: 400px;
-	top: 50px;
-	left: 400px;
-	z-index: 10;
 	border: solid 2px #ccc;
 	padding: 25px;
 	background-color: #e5f6ff;
 	border-radius: 3px;
-}
-
-.mainContents {
-	position: absolute;
-	top: 50px;
-	left: 420px;
-	z-index: 15;
+	margin: auto;
 }
 
 .mainContents h1 {
@@ -46,7 +36,7 @@ header {
 }
 
 .details {
-	width: 410px;
+	width: 400px;
 }
 
 .sideMenu {
@@ -94,4 +84,83 @@ footer p {
 	text-align: right;
 	margin-top: 10px;
 	margin-right: 10px;
+}
+
+@media screen and (max-width:639px) {
+	* {
+		margin: 0px;
+		padding: 0px;
+	}
+	.global {
+		height: 820px;
+		position: relative;
+	}
+	header {
+		height: 50px;
+	}
+	.mainContents {
+		height: 550px;
+		width: 200px;
+		border: solid 2px #ccc;
+		padding: 15px;
+		background-color: #e5f6ff;
+		border-radius: 3px;
+		margin: auto;
+	}
+
+	.mainContents h1 {
+		font-family: arial, sans-serif;
+		padding: 10px 0px 5px 0px;
+		font-size: 15px;
+		border-bottom: 1px solid #383232;
+	}
+	.mainContents p {
+		font-family: arial, sans-serif;
+		padding: 5px 0px 10px 0px;
+		font-size: 10px;
+	}
+	.details {
+		width: 200px;
+	}
+	.sideMenu {
+		width: 40px;
+		height: 120px;
+		float: right;
+		margin-right: 25px;
+	}
+	.sideMenu li {
+		padding: 8px;
+		font-size: 10px;
+		font-family: 'Ubuntu', sans-serif;
+		border-left: 3px solid #474655;
+		border-top: 1px solid #474655;
+		border-right: 1px solid #474655;
+		border-bottom: 1px solid #474655;
+		background-color: #fff;
+		list-style: none;
+	}
+	.button {
+		display: inline-block;
+		border-radius: 3px;
+		font-size: 10pt;
+		width: 60px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		text-align: center;
+		border: solid 2px #ccc;
+		cursor: pointer;
+		background: #e5f6ff;
+		color: black
+	}
+	footer {
+		height: 50px;
+		width: 100%;
+		position: absolute;
+		bottom: 0;
+	}
+	footer p {
+		text-align: right;
+		margin-top: 10px;
+		margin-right: 10px;
+	}
 }

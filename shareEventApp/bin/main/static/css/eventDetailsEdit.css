@@ -186,13 +186,13 @@ footer p {
 		border-radius: 3px;
 	}
 	.sideMenu {
-		width: 70px;
+		width: 40px;
 		height: 120px;
 		float: right;
 		margin-right: 25px;
 	}
 	.sideMenu li {
-		padding: 14px;
+		padding: 8px;
 		font-size: 10px;
 		font-family: 'Ubuntu', sans-serif;
 		border-left: 3px solid #474655;
