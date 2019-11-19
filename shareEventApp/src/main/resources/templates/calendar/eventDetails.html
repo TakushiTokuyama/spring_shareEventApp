@@ -4,7 +4,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>詳細</title>
 <link rel="stylesheet" type="text/css" href="/css/eventDetails.css">
-
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link href="/css/eventDetails.css" rel="stylesheet" type="text/css"
+	media="(min-width: 320px) and (max-width: 639px)">
 </head>
 <body>
 	<div class="global">
@@ -75,13 +78,12 @@
 			</div>
 
 		</div>
-		<div class="mapArea"></div>
 		<div class="mapContents">
 			<h1>場所</h1>
 			<p th:text="${eventDetails.place}" />
 			<h1>地図</h1>
 			<p>
-				<iframe width="450" height="500" th:src="${map}"></iframe>
+				<iframe width="430" height="450" th:src="${map}"></iframe>
 			</p>
 		</div>
 
