@@ -9,7 +9,7 @@
 }
 
 .titleList {
-	width:500px;
+	width: 500px;
 	height: 70px;
 	position: relative;
 	left: 200px;
@@ -26,8 +26,7 @@ header {
 }
 
 table {
-	position: relative;
-	left: 150px;
+	margin: auto;
 }
 
 .sun {
@@ -101,6 +100,85 @@ footer p {
 	margin-right: 10px;
 }
 
-header {
-	height: 50px;
+@media screen and (max-width:639px) {
+	* {
+		margin: 0px;
+		padding: 0px;
+	}
+	.global {
+		height: 1000px;
+		position: relative;
+		width: 100%;
+	}
+	.titleList {
+		width: 200px;
+		left: 0px;
+	}
+	.titleList li {
+		font-size: 30px;
+	}
+	header {
+		height: 50px;
+	}
+	.sun {
+		color: red;
+		background-color: #f2dede
+	}
+	.calendarTable {
+		width: 100%;
+	}
+	.calendarTable th {
+		background-color: #EBE9E3;
+		border: 1px solid #CCC;
+	}
+	.calendarTable td {
+		width: 100px;
+		border: 1px solid #CCC;
+	}
+	td ul {
+		padding: 0px;
+		margin: 1px 0px;
+	}
+	span {
+		text-align: start;
+	}
+	.date {
+		font-size: 18px;
+		display: inline;
+	}
+	.events {
+		height: 150px;
+		overflow: auto;
+	}
+	li {
+		list-style: none;
+	}
+	.sideMenu {
+		width: 40px;
+		height: 100px;
+		float: right;
+		margin-right: 10px;
+	}
+	.sideMenu li {
+		padding: 5px;
+		font-size: 10px;
+		font-family: 'Ubuntu', sans-serif;
+		border-left: 3px solid #474655;
+		border-top: 1px solid #474655;
+		border-right: 1px solid #474655;
+		border-bottom: 1px solid #474655;
+		background-color: #fff;
+		list-style: none;
+	}
+	footer {
+		height: 50px;
+		width: 100%;
+		position: absolute;
+		bottom: 0;
+	}
+	footer p {
+		text-align: right;
+		margin-top: 10px;
+		margin-right: 10px;
+	}
 }
