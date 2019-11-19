@@ -5,6 +5,10 @@
 <title>削除</title>
 <link rel="stylesheet" type="text/css"
 	href="/css/eventDetailsDelete.css">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link href="/css/eventDetailsDelete.css" rel="stylesheet"
+	type="text/css" media="(min-width: 320px) and (max-width: 639px)">
 </head>
 <body>
 	<div class="global">
@@ -16,8 +20,6 @@
 				<li><a href="/calendar/event">カレンダー</a></li>
 			</ul>
 		</div>
-
-		<div class="mainArea"></div>
 		<div class="mainContents">
 			<form class="details" action="/calendar/eventDetailsDelete"
 				method="post" th:object="${eventDetails}">
