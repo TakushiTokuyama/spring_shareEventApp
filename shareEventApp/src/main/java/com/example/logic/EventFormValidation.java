@@ -1,6 +1,6 @@
 package com.example.logic;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import com.example.domain.CalendarEvent;
@@ -9,19 +9,19 @@ public class EventFormValidation {
 
 	public boolean timeValidate(CalendarEvent calenderEvent) {
 
-		String startHour = calenderEvent.getStartTime().substring(0,2);
+		String startHour = calenderEvent.getStartTime().substring(0, 2);
 
 		String startMinutes = calenderEvent.getStartTime().substring(3);
 
 		int startTime = Integer.parseInt(startHour + startMinutes);
 
-		String endHour = calenderEvent.getEndTime().substring(0,2);
+		String endHour = calenderEvent.getEndTime().substring(0, 2);
 
 		String endMinutes = calenderEvent.getEndTime().substring(3);
 
 		int endTime = Integer.parseInt(endHour + endMinutes);
 
-		if(startTime >= endTime) {
+		if (startTime >= endTime) {
 			return true;
 		}
 
@@ -29,32 +29,52 @@ public class EventFormValidation {
 
 	}
 
+	public boolean dayValidate(CalendarEvent calenderEvent) {
 
+		LocalDateTime today = LocalDateTime.now();
 
-public boolean dayValidate(CalendarEvent calenderEvent){
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 
-	LocalDate today = LocalDate.now();
+		int today_yyyyMMdd = Integer.parseInt(today.format(formatter));
 
-	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+		String selectedDay = calenderEvent.getEventDay();
 
-	int today_yyyyMMdd = Integer.parseInt(today.format(formatter));
+		String selectedYear = selectedDay.substring(0, 4);
 
-	String selectedDay = calenderEvent.getEventDay();
+		String selectedMonth = selectedDay.substring(5, 7);
 
-	String selectedYear = selectedDay.substring(0,4);
+		String selectedMinutes = selectedDay.substring(8);
 
-	String selectedMonth = selectedDay.substring(5,7);
+		int selectedEventDay = Integer.parseInt(selectedYear + selectedMonth + selectedMinutes);
 
-	String selectedMinutes = selectedDay.substring(8);
+		DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("HHmm");
+		int today_HHmm = Integer.parseInt(today.format(formatterTime));
 
-	int selectedEventDay = Integer.parseInt(selectedYear + selectedMonth + selectedMinutes);
+		String startHour = calenderEvent.getStartTime().substring(0, 2);
 
-	if(today_yyyyMMdd >= selectedEventDay) {
-		return true;
+		String startMinutes = calenderEvent.getStartTime().substring(3);
+
+		int startTime = Integer.parseInt(startHour + startMinutes);
+
+		if (today_yyyyMMdd > selectedEventDay) {
+			return true;
+		}
+
+		if (today_yyyyMMdd == selectedEventDay) {
+
+			if (startTime <= today_HHmm) {
+				return true;
+			}
+
+			return false;
+		}
+
+		if (startTime <= today_HHmm) {
+			return true;
+		}
+
+		return false;
+
 	}
-
-	return false;
-
-}
 
 }

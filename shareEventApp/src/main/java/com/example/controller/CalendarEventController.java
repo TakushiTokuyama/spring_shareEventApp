@@ -74,7 +74,7 @@ public class CalendarEventController {
 		}
 
 		if (efValidate.dayValidate(calendarEvent)) {
-			model.addAttribute("next", "次の日以降を入力して下さい");
+			model.addAttribute("next", "正しい日程を入力して下さい");
 			return "calendar/eventForm";
 		}
 
@@ -182,7 +182,7 @@ public class CalendarEventController {
 		}
 
 		if (efValidate.dayValidate(calendarEvent)) {
-			mav.addObject("next", "次の日以降を入力して下さい");
+			mav.addObject("next", "正しい日程を入力して下さい");
 			return mav;
 		}
 
@@ -222,6 +222,5 @@ public class CalendarEventController {
 
 		return mav;
 	}
-
 
 }
