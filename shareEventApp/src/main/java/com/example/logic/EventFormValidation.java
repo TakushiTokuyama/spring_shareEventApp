@@ -69,10 +69,6 @@ public class EventFormValidation {
 			return false;
 		}
 
-		if (startTime <= today_HHmm) {
-			return true;
-		}
-
 		return false;
 
 	}
